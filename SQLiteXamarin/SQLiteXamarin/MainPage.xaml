@@ -7,8 +7,34 @@
              x:Class="SQLiteXamarin.MainPage">
 
     <StackLayout>
-  
-        
+        <Picker Title="Role"
+        TitleColor="Red"
+        ItemsSource="{Binding Monkeys}"
+        HorizontalOptions="FillAndExpand"
+        ItemDisplayBinding="{Binding Name}" />
+
+        <Entry
+            Placeholder="Username"    
+            HorizontalOptions="FillAndExpand"
+        />
+
+        <Entry
+            Placeholder="********"    
+            IsPassword="true"
+            HorizontalOptions="FillAndExpand"
+        />
+        <StackLayout 
+            Orientation="Horizontal">
+            
+            <Button
+            Text="Login"  
+            HorizontalOptions="FillAndExpand"
+        />
+            <Button
+            Text="Register"  
+            HorizontalOptions="CenterAndExpand"
+        />
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
