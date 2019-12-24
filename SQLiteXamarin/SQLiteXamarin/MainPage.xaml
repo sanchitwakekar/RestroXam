@@ -9,31 +9,33 @@
     <StackLayout>
         <Picker Title="Role"
         TitleColor="Red"
-        ItemsSource="{Binding Monkeys}"
+        ItemsSource="{Binding Role}"
         HorizontalOptions="FillAndExpand"
-        ItemDisplayBinding="{Binding Name}" />
+        SelectedItem="{Binding SelectedRole}"/>
 
         <Entry
             Placeholder="Username"    
             HorizontalOptions="FillAndExpand"
-        />
+            Text="{Binding Username}" />
 
         <Entry
             Placeholder="********"    
             IsPassword="true"
             HorizontalOptions="FillAndExpand"
-        />
+            Text="{Binding Password}" />
+        
         <StackLayout 
             Orientation="Horizontal">
-            
+
             <Button
-            Text="Login"  
-            HorizontalOptions="FillAndExpand"
-        />
+                Text="Login"  
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding Login}" />
+                
             <Button
-            Text="Register"  
-            HorizontalOptions="CenterAndExpand"
-        />
+                Text="Register"  
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding Register}"  />            
         </StackLayout>
     </StackLayout>
 
