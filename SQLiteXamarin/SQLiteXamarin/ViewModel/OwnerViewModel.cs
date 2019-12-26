@@ -28,7 +28,7 @@ namespace SQLiteXamarin.ViewModel
 
         private void RestaurantDetails()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new Restaurant());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new View.Restaurant());
         }
 
         public Command Restaurant
