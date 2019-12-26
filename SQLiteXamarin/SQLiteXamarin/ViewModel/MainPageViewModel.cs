@@ -51,11 +51,12 @@ namespace SQLiteXamarin.ViewModel
                         Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView(retrivedUser));
                     }
                 }
-            }catch(NullReferenceException n)
+            }
+            catch (NullReferenceException n)
             {
 
             }
-           
+
         }
 
         public string Username

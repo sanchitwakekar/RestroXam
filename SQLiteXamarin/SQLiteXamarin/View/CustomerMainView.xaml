@@ -8,20 +8,28 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Menu"
-                HorizontalOptions="CenterAndExpand" />
+                   HorizontalOptions="CenterAndExpand" />
 
-            <ListView ItemsSource="{Binding MovieList}" HasUnevenRows="true" SeparatorVisibility="None">
-                <ListView.ItemTemplate >
+            <ListView ItemsSource="{Binding MovieList}"
+                      HasUnevenRows="true"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Margin="10,10,10,0">
-                                <Image Source="{Binding Poster}" Aspect="AspectFit" HorizontalOptions="StartAndExpand"/>
-                                <Label HorizontalOptions="CenterAndExpand" Text="{Binding ItemName}" FontSize="Large"/>
-                                <Label HorizontalOptions="CenterAndExpand" Text="{Binding ItemPrice}" FontSize="Medium"/>
+                            <StackLayout Orientation="Horizontal"
+                                         Margin="10,10,10,0">
+                                <Image Source="{Binding Poster}"
+                                       Aspect="AspectFit"
+                                       HorizontalOptions="StartAndExpand" />
+                                <Label HorizontalOptions="CenterAndExpand"
+                                       Text="{Binding ItemName}"
+                                       FontSize="Large" />
+                                <Label HorizontalOptions="CenterAndExpand"
+                                       Text="{Binding ItemPrice}"
+                                       FontSize="Medium" />
                                 <Stepper Maximum="10"
-                                    Increment="1"
-                                    HorizontalOptions="EndAndExpand"
-                                    />
+                                         Increment="1"
+                                         HorizontalOptions="EndAndExpand" />
                                 <!--ValueChanged="{Binding OnStepperValueChanged}"-->
                             </StackLayout>
                         </ViewCell>
