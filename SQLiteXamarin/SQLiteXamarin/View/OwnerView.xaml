@@ -7,9 +7,6 @@
              x:Class="SQLiteXamarin.View.OwnerView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -21,26 +18,29 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Text="ADD RESTAURANT"
+                <Button Text="RESTAURANT"
                        Grid.Row="0"
                        Grid.Column="0"
+                        Command="{Binding Restaurant}"
                       />
 
-                <Button Text="REMOVE RESTAURANT"
+                <Button Text="CATEGORY"
                        Grid.Row="0"
-                       Grid.Column="1" />
+                       Grid.Column="1" 
+                       Command="{Binding Category}"
+                       />
 
-                <Button Text="UPDATE"
+                <Button Text="ITEM"
                        Grid.Row="1"
-                       Grid.Column="0" />
+                       Grid.Column="0" 
+                       Command="{Binding Item}"
+                       />
 
-                <Button Text="ADD ITEM"
+                <Button Text="USER SETTING"
                         Grid.Row="1"
-                        Grid.Column="0" />
-                
-                <Button Text="ADD RESTAURANT"
-                        Grid.Row="1"
-                        Grid.Column="0" />
+                        Grid.Column="1"
+                        Command="{Binding UserSetting}"
+                       />
 
             </Grid>
         </StackLayout>
