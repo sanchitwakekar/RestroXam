@@ -2,6 +2,7 @@
 using SQLiteXamarin.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 
@@ -35,6 +36,11 @@ namespace SQLiteXamarin.Data
            return db.GetConnection().Table<User>()
           .Where(x => x.username == user.username && x.password == user.password && x.role == user.role)
           .FirstOrDefault();
+        }
+        public static ObservableCollection<Restaurant> GetRestaurantList(DBHelper db, User user)
+        {
+            return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>()
+           .Where(x => x.owner_id == user.user_id));
         }
 
     }

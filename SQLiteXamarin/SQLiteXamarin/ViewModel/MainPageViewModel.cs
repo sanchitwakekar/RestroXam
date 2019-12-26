@@ -40,15 +40,22 @@ namespace SQLiteXamarin.ViewModel
 
         private void LoginUser()
         {
-            if (!string.IsNullOrWhiteSpace(_username) && !string.IsNullOrWhiteSpace(_password) && !string.IsNullOrWhiteSpace(_role))
-            {                
-                User user =new User() { username = _username, password = _password, role = _role };
-                User retrivedUser = DBHelper.GetUser(new DBHelper(), user);
-                if (!retrivedUser.Equals(null) && retrivedUser.role.Equals("Owner"))
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_username) && !string.IsNullOrWhiteSpace(_password) && !string.IsNullOrWhiteSpace(_role))
                 {
-                    Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView(retrivedUser));
-                }               
+                    User user = new User() { username = _username, password = _password, role = _role };
+                    User retrivedUser = DBHelper.GetUser(new DBHelper(), user);
+                    if (!retrivedUser.Equals(null) && retrivedUser.role.Equals("Owner"))
+                    {
+                        Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView(retrivedUser));
+                    }
+                }
+            }catch(NullReferenceException n)
+            {
+
             }
+           
         }
 
         public string Username
