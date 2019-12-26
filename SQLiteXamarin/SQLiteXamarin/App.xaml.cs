@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLiteXamarin.Data;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -6,11 +7,16 @@ namespace SQLiteXamarin
 {
     public partial class App : Application
     {
-        public App()
+        public static string DatabasePath = string.Empty;
+        DBHelper db;
+        public App(string databasePath)
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage());
+            DatabasePath = databasePath;
+            db = new DBHelper();
+            db.SetupTables();
         }
 
         protected override void OnStart()

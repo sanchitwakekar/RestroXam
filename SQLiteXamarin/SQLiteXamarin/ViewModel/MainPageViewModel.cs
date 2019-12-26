@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SQLiteXamarin.Data;
+using SQLiteXamarin.Model;
+using SQLiteXamarin.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -11,7 +14,8 @@ namespace SQLiteXamarin.ViewModel
     {
         private string _username, _password, _role;
         public List<string> Role { get; set; }
-        public Command Login, Register;
+        public Command _Login, _Register;
+        DBHelper db;
 
         public MainPageViewModel()
         {
@@ -36,7 +40,13 @@ namespace SQLiteXamarin.ViewModel
 
         private void LoginUser()
         {
-            throw new NotImplementedException();
+            if (_username.Equals("admin") && _password.Equals("admin") && _role.Equals("Owner"))
+            {
+                db = new DBHelper();
+                User user =new User() { username = _username, password = _password, role = _role };
+                DBHelper.GetUser(db, user);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView());
+            }
         }
 
         public string Username
@@ -70,6 +80,28 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _role = value;
+            }
+        }
+        public Command Register
+        {
+            get
+            {
+                return _Register;
+            }
+            set
+            {
+                _Register = value;
+            }
+        }
+        public Command Login
+        {
+            get
+            {
+                return _Login;
+            }
+            set
+            {
+                _Login = value;
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

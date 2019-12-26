@@ -21,7 +21,8 @@
                                 <Stepper Maximum="10"
                                     Increment="1"
                                     HorizontalOptions="EndAndExpand"
-                                    ValueChanged="{Binding OnStepperValueChanged}" />
+                                    />
+                                <!--ValueChanged="{Binding OnStepperValueChanged}"-->
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

@@ -8,11 +8,12 @@ namespace SQLiteXamarin.Model
     class Restaurant
     {
         [PrimaryKey, AutoIncrement]
-        public int id { get; set; }
+        public int rest_id { get; set; }
+        [Unique]
         public string rest_name { get; set; }
-        public string area_name { get; set; }
+        public string area { get; set; }
         public double lat { get; set; }
         public double lang { get; set; }
-        public string owner_username { get; set; }
+        public int owner_id { get; set; }
     }
 }

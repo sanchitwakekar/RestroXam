@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Foundation;
@@ -23,7 +24,11 @@ namespace SQLiteXamarin.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            string dbName = "RestroXam.db3";
+            //! added using System.IO;
+            string folderPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "..", "Library");
+            string dbPath = Path.Combine(folderPath, dbName);
+            LoadApplication(new App(dbPath));
 
             return base.FinishedLaunching(app, options);
         }

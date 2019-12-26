@@ -8,13 +8,11 @@ namespace SQLiteXamarin.Model
     class Item
     {
         [PrimaryKey, AutoIncrement]
-        public int id { get; set; }
+        public int item_id { get; set; }
         public string item_name { get; set; }
         public int price { get; set; }
-        public int quantity { get; set; }
-        public string  imgurl { get; set; }
-        public double category { get; set; }
-        public string rest_name { get; set; }
-
+        public int quantity { get; set; }        
+        public double cat_id{ get; set; }
+        public string rest_id { get; set; }
     }
 }

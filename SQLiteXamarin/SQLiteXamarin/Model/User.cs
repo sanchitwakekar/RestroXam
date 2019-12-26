@@ -7,9 +7,11 @@ namespace SQLiteXamarin.Model
 {
     class User
     {
-        [PrimaryKey]
+        [PrimaryKey,AutoIncrement]
+        public int user_id { get; set; }
+        [Unique]
         public string username { get; set; }
-        public string passwrod { get; set; }
+        public string password { get; set; }
         public string role { get; set; }
     }
 }
