@@ -1,4 +1,5 @@
 ﻿using SQLiteXamarin.Data;
+using SQLiteXamarin.Model;
 using SQLiteXamarin.View;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace SQLiteXamarin.ViewModel
         public Command _Restaurant, _Category, _Item, _UserSetting;
         DBHelper db;
 
-        public OwnerViewModel()
+        public OwnerViewModel(User user)
         {
             Restaurant = new Command(RestaurantDetails);
             Category = new Command(RestaurantDetails);

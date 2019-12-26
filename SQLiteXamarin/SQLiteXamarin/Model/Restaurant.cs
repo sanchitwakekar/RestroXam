@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SQLiteXamarin.Model
 {
-    class Restaurant
+    public class Restaurant
     {
         [PrimaryKey, AutoIncrement]
         public int rest_id { get; set; }
