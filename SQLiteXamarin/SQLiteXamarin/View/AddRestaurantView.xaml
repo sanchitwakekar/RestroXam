@@ -14,9 +14,13 @@
 
             <Entry
                 Placeholder="Enter Restaurant Area"
-                IsPassword="True"
                 Text="{Binding RestaurantArea}"
                 />
+
+            <Button
+                Text="ADD"  
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding AddRestaurantDetails}"  />
 
         </StackLayout>
     </ContentPage.Content>

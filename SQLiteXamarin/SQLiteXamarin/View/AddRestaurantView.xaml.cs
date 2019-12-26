@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLiteXamarin.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace SQLiteXamarin.View
         public AddRestaurantView()
         {
             InitializeComponent();
+            this.BindingContext = new AddRestaurentViewModel();
         }
     }
 }
