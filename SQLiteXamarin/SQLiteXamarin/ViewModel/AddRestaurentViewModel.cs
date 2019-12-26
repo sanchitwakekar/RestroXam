@@ -1,4 +1,6 @@
-﻿using SQLiteXamarin.View;
+﻿using SQLiteXamarin.Data;
+using SQLiteXamarin.Model;
+using SQLiteXamarin.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,17 +14,26 @@ namespace SQLiteXamarin.ViewModel
     {
         private string _restaurantName, _restaurantArea;
         public Command _addRestaurantDetails;
-        public AddRestaurentViewModel()
+        User user;
+        public AddRestaurentViewModel(User _user)
         {
             AddRestaurantDetails = new Command(AddRestaurant);
-
+            user = _user;
         }
 
         private void AddRestaurant()
         {
             if (!string.IsNullOrWhiteSpace(_restaurantName) && !string.IsNullOrWhiteSpace(_restaurantArea))
             {
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new Restaurant());
+                Model.Restaurant rest = new Model.Restaurant() {
+                    rest_name = _restaurantName,
+                    area = _restaurantArea,
+                    lat = 21.132545,
+                    lang = 79.078413,
+                    owner_id=user.user_id,
+                };
+                DBHelper.AddRestaurant(new DBHelper(), rest);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new View.Restaurant(user));
             }
         }
         public string RestaurantArea

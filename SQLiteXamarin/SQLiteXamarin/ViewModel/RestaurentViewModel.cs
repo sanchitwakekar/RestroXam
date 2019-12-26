@@ -31,13 +31,14 @@ namespace SQLiteXamarin.ViewModel
         }
         public RestaurentViewModel(User _user)
         {
+            user = _user;
             AddRestaurant = new Command(AddRestaurantPage);
-            DBHelper.GetRestaurantList(new DBHelper(), _user);
+            RestaurantList = DBHelper.GetRestaurantList(new DBHelper(), _user);
         }
 
         private void AddRestaurantPage()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new AddRestaurantView());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new AddRestaurantView(user));
         }
 
         public Command AddRestaurant

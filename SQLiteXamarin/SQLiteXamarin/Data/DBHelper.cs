@@ -42,6 +42,24 @@ namespace SQLiteXamarin.Data
             return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>()
            .Where(x => x.owner_id == user.user_id));
         }
+        public static void AddRestaurant(DBHelper _db, Restaurant restaurant)
+        {
+            SQLiteConnection db = _db.GetConnection();
+            db.Insert(restaurant);
+            db.Close();
+        }
+        public static void AddCategory(DBHelper _db, Category category)
+        {
+            SQLiteConnection db = _db.GetConnection();
+            db.Insert(category);
+            db.Close();
+        }
+        public static void AddItem(DBHelper _db, Item item)
+        {
+            SQLiteConnection db = _db.GetConnection();
+            db.Insert(item);
+            db.Close();
+        }
 
     }
 }
