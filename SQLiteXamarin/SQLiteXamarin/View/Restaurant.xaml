@@ -29,14 +29,7 @@
                 Text="ADD"  
                 HorizontalOptions="FillAndExpand"
                 Command="{Binding AddRestaurant}"  />
-            <Button
-                Text="REMOVE"  
-                HorizontalOptions="FillAndExpand"
-                Command="{Binding RemoveRestaurant}"  />
-            <Button
-                Text="UPDATE"  
-                HorizontalOptions="FillAndExpand"
-                Command="{Binding UpdateRestaurant}"  />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
