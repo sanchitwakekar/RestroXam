@@ -13,12 +13,12 @@ namespace SQLiteXamarin.ViewModel
     {
         private string _restaurantName, _restaurantArea;
         public Command _removeRestaurant, _updateRestaurant;
-        User user;
-        public RestaurantDetailModelView(User _user)
+        Restaurant restaurant;
+        public RestaurantDetailModelView(Restaurant _restaurant)
         {
             UpdateRestaurant = new Command(UpdateRestaurantDetails);
             RemoveRestaurant = new Command(UpdateRestaurantDetail);
-            user = _user;
+            restaurant = _restaurant;
         }
 
         private void UpdateRestaurantDetails()
