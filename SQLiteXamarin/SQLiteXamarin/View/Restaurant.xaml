@@ -7,9 +7,36 @@
              x:Class="SQLiteXamarin.View.Restaurant">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <ListView ItemsSource="{Binding MovieList}" HasUnevenRows="true" SeparatorVisibility="None">
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Update"  ></MenuItem>
+                                <MenuItem Text="Delete" ></MenuItem>
+                            </ViewCell.ContextActions>
+                            <StackLayout Orientation="Horizontal" Margin="10,10,10,0">
+                                <Label HorizontalOptions="CenterAndExpand" Text="{Binding ItemPrice}" FontSize="Medium"/>                               
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <Button
+                Text="ADD"  
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding AddRestaurant}"  />
+            <Button
+                Text="REMOVE"  
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding RemoveRestaurant}"  />
+            <Button
+                Text="UPDATE"  
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding UpdateRestaurant}"  />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
