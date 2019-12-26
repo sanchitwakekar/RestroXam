@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SQLiteXamarin.Model
 {
-    class User
+    public class User
     {
         [PrimaryKey,AutoIncrement]
         public int user_id { get; set; }

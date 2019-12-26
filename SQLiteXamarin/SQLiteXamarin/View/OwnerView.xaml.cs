@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLiteXamarin.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,10 @@ namespace SQLiteXamarin.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OwnerView : ContentPage
     {
-        public OwnerView()
+        public OwnerView(User user)
         {
             InitializeComponent();
+            this.BindingContext = new OwnerView(user);
         }
     }
 }

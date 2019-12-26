@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace SQLiteXamarin.ViewModel
 {
-    class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : INotifyPropertyChanged
     {
         private string _username, _password, _role;
         public List<string> Role { get; set; }
@@ -40,12 +40,14 @@ namespace SQLiteXamarin.ViewModel
 
         private void LoginUser()
         {
-            if (_username.Equals("admin") && _password.Equals("admin") && _role.Equals("Owner"))
-            {
-                db = new DBHelper();
+            if (!string.IsNullOrWhiteSpace(_username) && !string.IsNullOrWhiteSpace(_password) && !string.IsNullOrWhiteSpace(_role))
+            {                
                 User user =new User() { username = _username, password = _password, role = _role };
-                DBHelper.GetUser(db, user);
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView());
+                User retrivedUser = DBHelper.GetUser(new DBHelper(), user);
+                if (!retrivedUser.Equals(null) && retrivedUser.role.Equals("Owner"))
+                {
+                    Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView(retrivedUser));
+                }               
             }
         }
 
