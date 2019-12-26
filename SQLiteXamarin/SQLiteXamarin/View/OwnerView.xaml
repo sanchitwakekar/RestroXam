@@ -19,28 +19,24 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Text="RESTAURANT"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                        Command="{Binding Restaurant}"
-                      />
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Command="{Binding Restaurant}" />
 
                 <Button Text="CATEGORY"
-                       Grid.Row="0"
-                       Grid.Column="1" 
-                       Command="{Binding Category}"
-                       />
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Command="{Binding Category}" />
 
                 <Button Text="ITEM"
-                       Grid.Row="1"
-                       Grid.Column="0" 
-                       Command="{Binding Item}"
-                       />
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Command="{Binding Item}" />
 
                 <Button Text="USER SETTING"
                         Grid.Row="1"
                         Grid.Column="1"
-                        Command="{Binding UserSetting}"
-                       />
+                        Command="{Binding UserSetting}" />
 
             </Grid>
         </StackLayout>

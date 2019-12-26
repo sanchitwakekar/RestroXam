@@ -7,16 +7,12 @@
              x:Class="SQLiteXamarin.View.AddRestaurantView">
     <ContentPage.Content>
         <StackLayout>
-            <Entry
-                Placeholder="Enter Restaurant Name"
-                Text="{Binding RestaurantName}"
-                />
+            <Entry Placeholder="Enter Restaurant Name"
+                   Text="{Binding RestaurantName}" />
 
-            <Entry
-                Placeholder="Enter Restaurant Area"
-                IsPassword="True"
-                Text="{Binding RestaurantArea}"
-                />
+            <Entry Placeholder="Enter Restaurant Area"
+                   IsPassword="True"
+                   Text="{Binding RestaurantArea}" />
 
         </StackLayout>
     </ContentPage.Content>

@@ -27,15 +27,15 @@ namespace SQLiteXamarin.Data
         }
         public static void AddUser(DBHelper _db, User user)
         {
-            SQLiteConnection db =  _db.GetConnection();
+            SQLiteConnection db = _db.GetConnection();
             db.Insert(user);
             db.Close();
         }
         public static User GetUser(DBHelper db, User user)
-        {            
-           return db.GetConnection().Table<User>()
-          .Where(x => x.username == user.username && x.password == user.password && x.role == user.role)
-          .FirstOrDefault();
+        {
+            return db.GetConnection().Table<User>()
+           .Where(x => x.username == user.username && x.password == user.password && x.role == user.role)
+           .FirstOrDefault();
         }
         public static ObservableCollection<Restaurant> GetRestaurantList(DBHelper db, User user)
         {
