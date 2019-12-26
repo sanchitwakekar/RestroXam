@@ -24,8 +24,9 @@ namespace SQLiteXamarin.Data
             db.CreateTable<Category>();
             db.CreateTable<Item>();
         }
-        public static void AddUser(SQLiteConnection db, User user)
+        public static void AddUser(DBHelper _db, User user)
         {
+            SQLiteConnection db =  _db.GetConnection();
             db.Insert(user);
             db.Close();
         }

@@ -10,16 +10,15 @@ using Xamarin.Forms;
 
 namespace SQLiteXamarin.ViewModel
 {
-    class MainPageViewModel : INotifyPropertyChanged
+    class RegisterViewModel : INotifyPropertyChanged
     {
-        private string _username, _password, _role;
+        private string _username, _password, _confirmPassword, _role;
         public List<string> Role { get; set; }
-        public Command _Login, _Register;
+        public Command _Register;
         DBHelper db;
 
-        public MainPageViewModel()
+        public RegisterViewModel()
         {
-            Login = new Command(LoginUser);
             Register = new Command(RegisterUser);
             Role = GetRole();
         }
@@ -35,17 +34,12 @@ namespace SQLiteXamarin.ViewModel
 
         private void RegisterUser()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new Register());
-        }
-
-        private void LoginUser()
-        {
-            if (_username.Equals("admin") && _password.Equals("admin") && _role.Equals("Owner"))
+            if (!string.IsNullOrWhiteSpace(_username) && !string.IsNullOrWhiteSpace(_password) && !string.IsNullOrWhiteSpace(_role) && _password.Equals(_confirmPassword))
             {
                 db = new DBHelper();
-                User user =new User() { username = _username, password = _password, role = _role };
-                DBHelper.GetUser(db, user);
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView());
+                User user = new User() { username = _username, password = _password, role = _role };
+                DBHelper.AddUser(db, user);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new MainPage());
             }
         }
 
@@ -71,6 +65,19 @@ namespace SQLiteXamarin.ViewModel
                 _password = value;
             }
         }
+
+
+        public string ConfirmPassword
+        {
+            get
+            {
+                return _confirmPassword;
+            }
+            set
+            {
+                _confirmPassword = value;
+            }
+        }
         public string SelectedRole
         {
             get
@@ -93,17 +100,7 @@ namespace SQLiteXamarin.ViewModel
                 _Register = value;
             }
         }
-        public Command Login
-        {
-            get
-            {
-                return _Login;
-            }
-            set
-            {
-                _Login = value;
-            }
-        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

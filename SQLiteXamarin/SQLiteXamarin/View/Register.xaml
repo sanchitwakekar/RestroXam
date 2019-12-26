@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SQLiteXamarin.View.Register">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry
+                Placeholder="Enter Username"
+                Text="{Binding Username}"
+                />
+
+            <Entry
+                Placeholder="Enter Password"
+                IsPassword="True"
+                Text="{Binding Password}"
+                />
+            <Entry
+                Placeholder="Confirm Password"
+                IsPassword="True"
+                Text="{Binding ConfirmPassword}"
+                />
+
+            <Picker Title="Role"
+                    TitleColor="Red"
+                    ItemsSource="{Binding Role}"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding SelectedRole}"/>
+
+            <Button
+                Text="Register"  
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding Register}"  />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
