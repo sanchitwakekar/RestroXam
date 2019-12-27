@@ -1,8 +1,10 @@
-﻿using SQLiteXamarin.Model;
+﻿using SQLiteXamarin.Data;
+using SQLiteXamarin.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
@@ -14,9 +16,10 @@ namespace SQLiteXamarin.ViewModel
         private string _itemName;
         private int _itemPrice, _itemQuantity;
         private Restaurant _restaurant;
+        private Restaurant restaurant;
         private Category _category;
-        public ObservableCollection<Restaurant> RestaurantList { get; set; }
-        public ObservableCollection<Category> CategoryList { get; set; }
+        public ObservableCollection<string> RestaurantList { get; set; }
+        public ObservableCollection<string> CategoryList { get; set; }
 
         public Command _submit;
       
@@ -28,20 +31,49 @@ namespace SQLiteXamarin.ViewModel
             Submit = new Command(SubmitItem);
             RestaurantList = GetAllRestaurants();
             CategoryList = GetAllCategory();
+
         }
-        public ObservableCollection<Restaurant> GetAllRestaurants()
+        public ObservableCollection<string> GetAllRestaurants()
         {
-            return null;
+            var restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
+            var restaurentNames = from r in restaurantlist
+                                  select r.rest_name;
+
+           
+
+            return (new ObservableCollection<string>(restaurentNames.ToList()));
         }
 
-        public ObservableCollection<Category> GetAllCategory()
+        public ObservableCollection<string> GetAllCategory()
         {
-            return null;
+            try
+            {
+                var categorylist = DBHelper.GetItemList(new DBHelper(), SelectedRestaurant);
+                var categoryNames = from r in categorylist
+                                    select r.cat_name;
+
+                return (new ObservableCollection<string>(categoryNames.ToList()));
+            }
+            catch
+            {
+                return null;
+            }
+           
         }
 
         private void SubmitItem()
         {
-           
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_itemName) && _itemPrice > 0 && _itemQuantity > 0 && !string.IsNullOrWhiteSpace(_restaurant.rest_name) && !string.IsNullOrWhiteSpace(_category.cat_name))
+                {
+                    
+                }
+            }
+            catch (NullReferenceException n)
+            {
+
+            }
         }
 
         public string ItemName
@@ -88,6 +120,7 @@ namespace SQLiteXamarin.ViewModel
             }
             set
             {
+                
                 _restaurant = value;
             }
         }
