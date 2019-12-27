@@ -17,7 +17,7 @@ namespace SQLiteXamarin.ViewModel
         public RestaurantDetailModelView(Restaurant _restaurant)
         {
             UpdateRestaurant = new Command(UpdateRestaurantDetails);
-            RemoveRestaurant = new Command(UpdateRestaurantDetail);
+            RemoveRestaurant = new Command(DeleteRestaurantDetail);
             restaurant = _restaurant;
             _restaurantName = _restaurant.rest_name;
             _restaurantArea = _restaurant.area;
@@ -25,12 +25,15 @@ namespace SQLiteXamarin.ViewModel
 
         private void UpdateRestaurantDetails()
         {
-           
+            if (!string.IsNullOrWhiteSpace(_restaurantName) && !string.IsNullOrWhiteSpace(_restaurantArea))
+            {
+                DBHelper.UpdateRestaurant(new DBHelper(), restaurant);
+            }
         }
 
-        private void UpdateRestaurantDetail()
+        private void DeleteRestaurantDetail()
         {
-           
+            DBHelper.DeleteRestaurant(new DBHelper(), restaurant);
         }
         public string RestaurantArea
         {

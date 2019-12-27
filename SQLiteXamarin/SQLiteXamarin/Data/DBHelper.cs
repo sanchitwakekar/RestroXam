@@ -57,7 +57,14 @@ namespace SQLiteXamarin.Data
         public static void UpdateRestaurant(DBHelper _db, Restaurant restaurant)
         {
             SQLiteConnection db = _db.GetConnection();
-            db.Delete(restaurant);
+            var updateRestaurant = db.Query<Restaurant>($"SELECT * FROM Restaurant WHERE rest_id = '{restaurant.rest_id}'");
+
+    // update your 'announcementToUpdate' object with new values here
+
+            if (db.Update(updateRestaurant) > 0)
+            {
+                System.Diagnostics.Debug.WriteLine("UPDATED");
+            }            
             db.Close();
         }
         public static void AddCategory(DBHelper _db, Category category)
