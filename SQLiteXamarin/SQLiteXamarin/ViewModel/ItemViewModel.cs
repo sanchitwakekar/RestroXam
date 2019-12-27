@@ -22,7 +22,9 @@ namespace SQLiteXamarin.ViewModel
         public ObservableCollection<string> CategoryList { get; set; }
 
         public Command _submit;
-      
+
+        ObservableCollection<Restaurant> restaurantlist;
+
         User user;
 
         public ItemViewModel()
@@ -30,22 +32,39 @@ namespace SQLiteXamarin.ViewModel
             user = MainPageViewModel.GetCurrentUser();
             Submit = new Command(SubmitItem);
             RestaurantList = GetAllRestaurants();
-            CategoryList = GetAllCategory();
+           
 
         }
         public ObservableCollection<string> GetAllRestaurants()
         {
-            var restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
+            restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
             var restaurentNames = from r in restaurantlist
                                   select r.rest_name;
             return (new ObservableCollection<string>(restaurentNames.ToList()));
         }
 
+        public void updateCategory(String rest)
+        {
+            SelectedRestaurant = restaurantlist.Where(st => st.rest_name.Equals(rest)).FirstOrDefault();
+            try
+            {
+                var categorylist = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant.rest_id);
+                var categoryNames = from r in categorylist
+                                    select r.cat_name;
+                CategoryList = new ObservableCollection<string>(categoryNames.ToList());
+               // return (new ObservableCollection<string>(categoryNames.ToList()));
+            }
+            catch
+            {
+               
+            }
+          
+        }
         public ObservableCollection<string> GetAllCategory()
         {
             try
             {
-                var categorylist = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant);
+                var categorylist = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant.rest_id);
                 var categoryNames = from r in categorylist
                                     select r.cat_name;
 

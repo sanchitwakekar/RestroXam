@@ -73,10 +73,10 @@ namespace SQLiteXamarin.Data
             db.Insert(category);
             db.Close();
         }
-        public static ObservableCollection<Category> GetCategoryList(DBHelper db, Restaurant rest)
+        public static ObservableCollection<Category> GetCategoryList(DBHelper db, int rest_id)
         {
             return new ObservableCollection<Category>(db.GetConnection().Table<Category>()
-           .Where(x => x.rest_id == rest.rest_id));
+           .Where(x => x.rest_id == rest_id));
         }
         //------------------------------Item---------------------
         public static void AddItem(DBHelper _db, Item item)

@@ -60,13 +60,11 @@ namespace SQLiteXamarin.ViewModel
         {
             try
             {                
-                var categorylist = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant);
-                var categoryNames = categorylist
-                                    .Where(st => st.rest_id == SelectedRestaurant.rest_id);
+                
                                     
 
            //     return (new ObservableCollection<string>(categoryNames.ToList()));
-                return categorylist;
+                return null;
             }
             catch (NotSupportedException nse)
             {
