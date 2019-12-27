@@ -17,7 +17,7 @@
                    HorizontalOptions="FillAndExpand"
                    Text="{Binding FoodCategory}" />
             
-            <Button Text="Login"
+            <Button Text="ADD"
                     HorizontalOptions="FillAndExpand"
                     Command="{Binding Submit}" />
 

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SQLiteXamarin.View.ItemView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Picker Title="Restaurant"
+                    TitleColor="Red"
+                    ItemsSource="{Binding RestaurantList}"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding SelectedRestaurant}" />
+
+            <Picker Title="Category"
+                    TitleColor="Red"
+                    ItemsSource="{Binding CategoryList}"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedItem="{Binding SelectedCategory}" />
+
+            <Entry Placeholder="Item Name"
+                   HorizontalOptions="FillAndExpand"
+                   Text="{Binding ItemName}" />
+
+            <Entry Placeholder="Item Price"
+                   HorizontalOptions="FillAndExpand"
+                   Keyboard="Numeric"
+                   Text="{Binding ItemPrice}" />
+
+            <Entry Placeholder="Item Quantity"
+                   HorizontalOptions="FillAndExpand"
+                   Keyboard="Numeric"
+                   Text="{Binding ItemQuantity}" />
+
+            <Button Text="Add"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding Add}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

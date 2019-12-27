@@ -13,22 +13,36 @@ namespace SQLiteXamarin.ViewModel
     class OwnerViewModel : INotifyPropertyChanged
     {
 
-        public Command _Restaurant, _Category, _Item, _UserSetting;
-        DBHelper db;
+        public Command _Restaurant, _Category, _Item, _Logout;
         User user;
 
         public OwnerViewModel()
         {
             Restaurant = new Command(RestaurantDetails);
-            Category = new Command(RestaurantDetails);
-            Item = new Command(RestaurantDetails);
-            UserSetting = new Command(RestaurantDetails);
+            Category = new Command(CategoryDetails);
+            Item = new Command(ItemDetails);
+            Logout = new Command(UserLogout);
             user = MainPageViewModel.GetCurrentUser(); ;
         }
 
         private void RestaurantDetails()
         {
             Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new RestaurantView());
+        }
+
+        private void CategoryDetails()
+        {
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new CategoryView());
+        }
+
+        private void ItemDetails()
+        {
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new ItemView());
+        }
+
+        private void UserLogout()
+        {
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new CategoryView());
         }
 
         public Command Restaurant
@@ -65,15 +79,15 @@ namespace SQLiteXamarin.ViewModel
                 _Item = value;
             }
         }
-        public Command UserSetting
+        public Command Logout
         {
             get
             {
-                return _UserSetting;
+                return _Logout;
             }
             set
             {
-                _UserSetting = value;
+                _Logout = value;
             }
         }
 

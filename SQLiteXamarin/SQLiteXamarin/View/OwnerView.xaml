@@ -33,10 +33,10 @@
                         Grid.Column="0"
                         Command="{Binding Item}" />
 
-                <Button Text="USER SETTING"
+                <Button Text="LOGOUT"
                         Grid.Row="1"
                         Grid.Column="1"
-                        Command="{Binding UserSetting}" />
+                        Command="{Binding Logout}" />
 
             </Grid>
         </StackLayout>
