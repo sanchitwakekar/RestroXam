@@ -38,9 +38,6 @@ namespace SQLiteXamarin.ViewModel
             var restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
             var restaurentNames = from r in restaurantlist
                                   select r.rest_name;
-
-           
-
             return (new ObservableCollection<string>(restaurentNames.ToList()));
         }
 
@@ -48,7 +45,7 @@ namespace SQLiteXamarin.ViewModel
         {
             try
             {
-                var categorylist = DBHelper.GetItemList(new DBHelper(), SelectedRestaurant);
+                var categorylist = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant);
                 var categoryNames = from r in categorylist
                                     select r.cat_name;
 

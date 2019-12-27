@@ -29,7 +29,7 @@ namespace SQLiteXamarin.ViewModel
                     area = _restaurantArea,
                     lat = 21.132545,
                     lang = 79.078413,
-                    owner_id=user.user_id,
+                    owner_id = user.user_id,
                 };
                 DBHelper.AddRestaurant(new DBHelper(), rest);
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();

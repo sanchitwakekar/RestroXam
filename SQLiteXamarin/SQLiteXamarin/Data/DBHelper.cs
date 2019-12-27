@@ -37,15 +37,11 @@ namespace SQLiteXamarin.Data
            .Where(x => x.username == user.username && x.password == user.password && x.role == user.role)
            .FirstOrDefault();
         }
+        //----------------------------------------------------
         public static ObservableCollection<Restaurant> GetRestaurantList(DBHelper db, User user)
         {
             return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>()
            .Where(x => x.owner_id == user.user_id));
-        }
-        public static ObservableCollection<Category> GetItemList(DBHelper db, Restaurant rest)
-        {
-            return new ObservableCollection<Category>(db.GetConnection().Table<Category>()
-           .Where(x => x.rest_id== rest.rest_id));
         }
         public static void AddRestaurant(DBHelper _db, Restaurant restaurant)
         {
@@ -64,20 +60,25 @@ namespace SQLiteXamarin.Data
             SQLiteConnection db = _db.GetConnection();
             var updateRestaurant = db.Query<Restaurant>($"SELECT * FROM Restaurant WHERE rest_id = '{restaurant.rest_id}'");
 
-    // update your 'announcementToUpdate' object with new values here
-
             if (db.Update(updateRestaurant) > 0)
             {
                 System.Diagnostics.Debug.WriteLine("UPDATED");
-            }            
+            }
             db.Close();
         }
+        //-----------------------------------------------------
         public static void AddCategory(DBHelper _db, Category category)
         {
             SQLiteConnection db = _db.GetConnection();
             db.Insert(category);
             db.Close();
         }
+        public static ObservableCollection<Category> GetCategoryList(DBHelper db, Restaurant rest)
+        {
+            return new ObservableCollection<Category>(db.GetConnection().Table<Category>()
+           .Where(x => x.rest_id == rest.rest_id));
+        }
+        //------------------------------Item---------------------
         public static void AddItem(DBHelper _db, Item item)
         {
             SQLiteConnection db = _db.GetConnection();

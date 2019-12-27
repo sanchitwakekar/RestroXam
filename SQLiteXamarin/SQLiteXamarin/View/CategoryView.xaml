@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"             
+             xmlns:local="clr-namespace:SQLiteXamarin.View"
              mc:Ignorable="d"
              x:Class="SQLiteXamarin.View.CategoryView">
     <ContentPage.Content>
@@ -11,15 +12,49 @@
                     TitleColor="Red"
                     ItemsSource="{Binding RestaurantList}"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding SelectedRestaurant}" />
+                    SelectedItem="{Binding SelectedRestaurant}">
+                <Picker.Triggers>
+                    <EventTrigger Event="SelectedIndexChanged">
+                        <local:ChangeCategory />
+                    </EventTrigger>
+                </Picker.Triggers>
+            </Picker>
 
             <Entry Placeholder="Food Category"
                    HorizontalOptions="FillAndExpand"
                    Text="{Binding FoodCategory}" />
-            
+
             <Button Text="ADD"
                     HorizontalOptions="FillAndExpand"
                     Command="{Binding Submit}" />
+
+            <ListView ItemsSource="{Binding CategoryList}"
+                      HasUnevenRows="true"
+                      x:Name="lst_Category"
+                      SeparatorVisibility="None">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
+                                         Margin="10,10,10,0"
+                                         x:Name="Item">
+                                <Label HorizontalOptions="StartAndExpand"
+                                       Text="{Binding cat_name}"
+                                       FontSize="Medium">
+                                    <!--<Label.GestureRecognizers>
+                                        <TapGestureRecognizer BindingContext="{Binding Source={x:Reference lst_Restaurants}, Path=BindingContext}"
+                                                              Command="{Binding ModifyRestaurant}"
+                                                              CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                              NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>-->
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
 
         </StackLayout>
     </ContentPage.Content>
