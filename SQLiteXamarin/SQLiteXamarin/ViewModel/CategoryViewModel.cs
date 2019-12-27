@@ -24,15 +24,16 @@ namespace SQLiteXamarin.ViewModel
         {
             user = MainPageViewModel.GetCurrentUser();
             Submit = new Command(SubmitCategory);
-        //    RestaurantList = GetAllRestaurants();
-            GetAllRestaurants();
-
+            RestaurantList = GetAllRestaurants();
+           
         }
-        public void GetAllRestaurants()
+        public ObservableCollection<string> GetAllRestaurants()
         {
             var restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
             var restaurentNames = from r in restaurantlist
-                                  select new { rest_name = r.rest_name };           
+                                  select r.rest_name;
+
+           return (new ObservableCollection<string>(restaurentNames.ToList()));
         }
 
         private void SubmitCategory()
