@@ -11,9 +11,13 @@ namespace SQLiteXamarin.ViewModel
 {
     class ItemViewModel : INotifyPropertyChanged
     {
-        private string _foodcategory;
+        private string _itemName;
+        private int _itemPrice, _itemQuantity;
         private Restaurant _restaurant;
+        private Category _category;
         public ObservableCollection<Restaurant> RestaurantList { get; set; }
+        public ObservableCollection<Category> CategoryList { get; set; }
+
         public Command _submit;
       
         User user;
@@ -21,28 +25,58 @@ namespace SQLiteXamarin.ViewModel
         public ItemViewModel()
         {
             user = MainPageViewModel.GetCurrentUser();
-            Submit = new Command(SubmitCategory);
+            Submit = new Command(SubmitItem);
             RestaurantList = GetAllRestaurants();
+            CategoryList = GetAllCategory();
         }
         public ObservableCollection<Restaurant> GetAllRestaurants()
         {
             return null;
         }
 
-        private void SubmitCategory()
+        public ObservableCollection<Category> GetAllCategory()
+        {
+            return null;
+        }
+
+        private void SubmitItem()
         {
            
         }
 
-        public string FoodCategory
+        public string ItemName
         {
             get
             {
-                return _foodcategory;
+                return _itemName;
             }
             set
             {
-                _foodcategory = value;
+                _itemName = value;
+            }
+        }
+
+        public int ItemPrice
+        {
+            get
+            {
+                return _itemPrice;
+            }
+            set
+            {
+                _itemPrice = value;
+            }
+        }
+
+        public int ItemQuantity
+        {
+            get
+            {
+                return _itemQuantity;
+            }
+            set
+            {
+                _itemQuantity = value;
             }
         }
 
@@ -55,6 +89,17 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _restaurant = value;
+            }
+        }
+        public Category SelectedCategory
+        {
+            get
+            {
+                return _category;
+            }
+            set
+            {
+                _category = value;
             }
         }
         public Command Submit
