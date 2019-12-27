@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
@@ -14,7 +15,7 @@ namespace SQLiteXamarin.ViewModel
     {
         private string _foodcategory;
         private Restaurant _restaurant;
-        public ObservableCollection<Restaurant> RestaurantList { get; set; }
+        public ObservableCollection<string> RestaurantList { get; set; }
         public Command _submit;
         DBHelper db;
         User user;
@@ -23,11 +24,15 @@ namespace SQLiteXamarin.ViewModel
         {
             user = MainPageViewModel.GetCurrentUser();
             Submit = new Command(SubmitCategory);
-            RestaurantList = GetAllRestaurants();
+        //    RestaurantList = GetAllRestaurants();
+            GetAllRestaurants();
+
         }
-        public ObservableCollection<Restaurant> GetAllRestaurants()
+        public void GetAllRestaurants()
         {
-            return DBHelper.GetRestaurantList(new DBHelper(), user);
+            var restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
+            var restaurentNames = from r in restaurantlist
+                                  select new { rest_name = r.rest_name };           
         }
 
         private void SubmitCategory()
