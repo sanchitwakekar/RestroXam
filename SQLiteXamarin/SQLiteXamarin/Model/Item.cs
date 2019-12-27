@@ -12,7 +12,7 @@ namespace SQLiteXamarin.Model
         public string item_name { get; set; }
         public int price { get; set; }
         public int quantity { get; set; }
-        public double cat_id { get; set; }
-        public string rest_id { get; set; }
+        public int cat_id { get; set; }
+        public int rest_id { get; set; }
     }
 }

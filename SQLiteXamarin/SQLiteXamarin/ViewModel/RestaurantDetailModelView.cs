@@ -19,6 +19,8 @@ namespace SQLiteXamarin.ViewModel
             UpdateRestaurant = new Command(UpdateRestaurantDetails);
             RemoveRestaurant = new Command(UpdateRestaurantDetail);
             restaurant = _restaurant;
+            _restaurantName = _restaurant.rest_name;
+            _restaurantArea = _restaurant.area;
         }
 
         private void UpdateRestaurantDetails()

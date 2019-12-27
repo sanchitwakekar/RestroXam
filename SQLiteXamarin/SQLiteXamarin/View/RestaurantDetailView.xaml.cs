@@ -14,7 +14,7 @@ namespace SQLiteXamarin.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RestaurantDetailView : ContentPage
     {
-        public RestaurantDetailView(Model.Restaurant restaurant)
+        public RestaurantDetailView(Restaurant restaurant)
         {
             InitializeComponent();
             this.BindingContext = new RestaurantDetailModelView(restaurant);

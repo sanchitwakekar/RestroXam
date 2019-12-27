@@ -12,12 +12,12 @@ using Xamarin.Forms.Xaml;
 namespace SQLiteXamarin.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Restaurant : ContentPage
+    public partial class RestaurantView : ContentPage
     {
-        public Restaurant(User user)
+        public RestaurantView()
         {
             InitializeComponent();
-            this.BindingContext = new RestaurentViewModel(user);
+            this.BindingContext = new RestaurentViewModel();
         }
     }
 }

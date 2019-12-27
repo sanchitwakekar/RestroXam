@@ -18,7 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="View\RestaurantView.xaml.cs">
+      <DependentUpon>RestaurantView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="View\AddRestaurantView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\CategoryView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\CustomerMainView.xaml">
@@ -30,7 +39,7 @@
     <EmbeddedResource Update="View\Register.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Restaurant.xaml">
+    <EmbeddedResource Update="View\RestaurantView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\RestaurantDetailView.xaml">

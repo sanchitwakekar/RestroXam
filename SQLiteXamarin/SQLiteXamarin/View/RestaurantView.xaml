@@ -4,25 +4,34 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="SQLiteXamarin.View.Restaurant">
+             x:Class="SQLiteXamarin.View.RestaurantView">
     <ContentPage.Content>
         <StackLayout>
 
             <ListView ItemsSource="{Binding RestaurantList}"
                       HasUnevenRows="true"
+                      x:Name="lst_Restaurants"
                       SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell >
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Update"></MenuItem>
                                 <MenuItem Text="Delete"></MenuItem>
                             </ViewCell.ContextActions>
                             <StackLayout Orientation="Horizontal"
-                                         Margin="10,10,10,0">
-                                <Label HorizontalOptions="CenterAndExpand"
+                                         Margin="10,10,10,0"
+                                         x:Name="Item">
+                                <Label HorizontalOptions="StartAndExpand"
                                        Text="{Binding rest_name}"
-                                       FontSize="Medium" />
+                                       FontSize="Medium">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer BindingContext="{Binding Source={x:Reference lst_Restaurants}, Path=BindingContext}"
+                                                              Command="{Binding ModifyRestaurant}"
+                                                              CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                              NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

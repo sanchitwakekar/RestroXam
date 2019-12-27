@@ -1,4 +1,5 @@
-﻿using SQLiteXamarin.Data;
+﻿using Newtonsoft.Json;
+using SQLiteXamarin.Data;
 using SQLiteXamarin.Model;
 using SQLiteXamarin.View;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SQLiteXamarin.ViewModel
@@ -19,7 +21,7 @@ namespace SQLiteXamarin.ViewModel
 
         public MainPageViewModel()
         {
-            Login = new Command(LoginUser);
+            Login = new Command(LoginUserAsync);
             Register = new Command(RegisterUser);
             Role = GetRole();
         }
@@ -38,7 +40,7 @@ namespace SQLiteXamarin.ViewModel
             Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new Register());
         }
 
-        private void LoginUser()
+        private async void LoginUserAsync()
         {
             try
             {
@@ -48,7 +50,10 @@ namespace SQLiteXamarin.ViewModel
                     User retrivedUser = DBHelper.GetUser(new DBHelper(), user);
                     if (!retrivedUser.Equals(null) && retrivedUser.role.Equals("Owner"))
                     {
-                        Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView(retrivedUser));
+                        var jsonValueToSave = JsonConvert.SerializeObject(retrivedUser);
+                        Application.Current.Properties["CurrentUser"] = jsonValueToSave;
+                        await Application.Current.SavePropertiesAsync();                      
+                        Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView());
                     }
                 }
             }
@@ -56,7 +61,11 @@ namespace SQLiteXamarin.ViewModel
             {
 
             }
-
+        }
+        public static User GetCurrentUser()
+        {
+            var value = Application.Current.Properties["CurrentUser"];
+            return JsonConvert.DeserializeObject<User>(Convert.ToString(value));            
         }
 
         public string Username

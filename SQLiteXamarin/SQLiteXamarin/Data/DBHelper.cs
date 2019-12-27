@@ -48,6 +48,18 @@ namespace SQLiteXamarin.Data
             db.Insert(restaurant);
             db.Close();
         }
+        public static void DeleteRestaurant(DBHelper _db, Restaurant restaurant)
+        {
+            SQLiteConnection db = _db.GetConnection();
+            db.Delete(restaurant);
+            db.Close();
+        }
+        public static void UpdateRestaurant(DBHelper _db, Restaurant restaurant)
+        {
+            SQLiteConnection db = _db.GetConnection();
+            db.Delete(restaurant);
+            db.Close();
+        }
         public static void AddCategory(DBHelper _db, Category category)
         {
             SQLiteConnection db = _db.GetConnection();

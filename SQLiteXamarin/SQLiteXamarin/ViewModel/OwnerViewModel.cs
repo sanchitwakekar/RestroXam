@@ -17,18 +17,18 @@ namespace SQLiteXamarin.ViewModel
         DBHelper db;
         User user;
 
-        public OwnerViewModel(User _user)
+        public OwnerViewModel()
         {
             Restaurant = new Command(RestaurantDetails);
             Category = new Command(RestaurantDetails);
             Item = new Command(RestaurantDetails);
             UserSetting = new Command(RestaurantDetails);
-            user = _user;
+            user = MainPageViewModel.GetCurrentUser(); ;
         }
 
         private void RestaurantDetails()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new View.Restaurant(user));
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new RestaurantView());
         }
 
         public Command Restaurant

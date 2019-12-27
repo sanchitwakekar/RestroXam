@@ -14,10 +14,10 @@ namespace SQLiteXamarin.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OwnerView : ContentPage
     {
-        public OwnerView(User user)
+        public OwnerView()
         {
             InitializeComponent();
-            this.BindingContext = new OwnerViewModel(user);
+            this.BindingContext = new OwnerViewModel();
         }
     }
 }

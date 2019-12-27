@@ -1,5 +1,4 @@
-﻿using SQLiteXamarin.Model;
-using SQLiteXamarin.ViewModel;
+﻿using SQLiteXamarin.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace SQLiteXamarin.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddRestaurantView : ContentPage
+    public partial class CategoryView : ContentPage
     {
-        public AddRestaurantView()
+        public CategoryView()
         {
             InitializeComponent();
-            this.BindingContext = new AddRestaurentViewModel();
+            this.BindingContext = new CategoryViewModel();
         }
     }
 }

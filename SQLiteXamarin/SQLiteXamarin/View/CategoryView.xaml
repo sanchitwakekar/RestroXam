@@ -4,22 +4,23 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="SQLiteXamarin.View.RestaurantDetailView">
+             x:Class="SQLiteXamarin.View.CategoryView">
     <ContentPage.Content>
         <StackLayout>
-            <Entry Placeholder="Restaurant Name"
-                   Text="{Binding RestaurantName}" />
-
-            <Entry Placeholder="Restaurant Address"
-                   Text="{Binding RestaurantArea}" />
-
-            <Button Text="REMOVE"
+            <Picker Title="Restaurant"
+                    TitleColor="Red"
+                    ItemsSource="{Binding RestaurantList}"
                     HorizontalOptions="FillAndExpand"
-                    Command="{Binding RemoveRestaurant}" />
+                    SelectedItem="{Binding SelectedRestaurant}" />
 
-            <Button Text="UPDATE"
+            <Entry Placeholder="Food Category"
+                   HorizontalOptions="FillAndExpand"
+                   Text="{Binding FoodCategory}" />
+            
+            <Button Text="Login"
                     HorizontalOptions="FillAndExpand"
-                    Command="{Binding UpdateRestaurant}" />
+                    Command="{Binding Submit}" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

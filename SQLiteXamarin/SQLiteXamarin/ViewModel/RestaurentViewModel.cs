@@ -15,6 +15,7 @@ namespace SQLiteXamarin.ViewModel
     {
 
         public Command _AddRestaurant;
+        private Command<object> _ModifyRestaurant;
         User user;
         private ObservableCollection<Model.Restaurant> _RestaurantList;
         public ObservableCollection<Model.Restaurant> RestaurantList
@@ -29,16 +30,22 @@ namespace SQLiteXamarin.ViewModel
                 OnPropertyChanged();
             }
         }
-        public RestaurentViewModel(User _user)
+        public RestaurentViewModel()
         {
-            user = _user;
+            user = MainPageViewModel.GetCurrentUser(); ;
             AddRestaurant = new Command(AddRestaurantPage);
-            RestaurantList = DBHelper.GetRestaurantList(new DBHelper(), _user);
+            ModifyRestaurant = new Command<object>(ModifyRestaurantPage);
+            RestaurantList = DBHelper.GetRestaurantList(new DBHelper(), user);
         }
 
         private void AddRestaurantPage()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new AddRestaurantView(user));
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new AddRestaurantView());
+        }
+        private void ModifyRestaurantPage(object obj)
+        {           
+            var itemData = obj as Restaurant;                          
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new RestaurantDetailView(itemData));
         }
 
         public Command AddRestaurant
@@ -50,6 +57,17 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _AddRestaurant = value;
+            }
+        }
+        public Command<object> ModifyRestaurant
+        {
+            get
+            {
+                return _ModifyRestaurant;
+            }
+            set
+            {
+                _ModifyRestaurant = value;
             }
         }
 
