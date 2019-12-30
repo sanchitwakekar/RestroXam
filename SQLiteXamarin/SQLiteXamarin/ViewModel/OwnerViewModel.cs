@@ -27,22 +27,22 @@ namespace SQLiteXamarin.ViewModel
 
         private void RestaurantDetails()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new RestaurantView());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new RestaurantView());
         }
 
         private void CategoryDetails()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new CategoryView());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new CategoryView());
         }
 
         private void ItemDetails()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new ItemView());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new ItemView());
         }
 
         private void UserLogout()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new CategoryView());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new CategoryView());
         }
 
         public Command Restaurant

@@ -40,12 +40,12 @@ namespace SQLiteXamarin.ViewModel
 
         private void AddRestaurantPage()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new AddRestaurantView());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new AddRestaurantView());
         }
         private void ModifyRestaurantPage(object obj)
         {           
             var itemData = obj as Restaurant;                          
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new RestaurantDetailView(itemData));
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new RestaurantDetailView(itemData));
         }
 
         public Command AddRestaurant

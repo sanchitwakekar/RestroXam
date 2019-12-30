@@ -70,7 +70,7 @@ namespace SQLiteXamarin.ViewModel
                 {
                     Category category = new Category() { rest_id = SelectedRestaurant.rest_id, cat_name = _foodcategory };
                     DBHelper.AddCategory(new DBHelper(), category);
-                    Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView());
+                    Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new OwnerView());
                 }
             }
             catch (NullReferenceException n)

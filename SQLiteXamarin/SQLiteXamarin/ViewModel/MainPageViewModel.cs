@@ -37,7 +37,7 @@ namespace SQLiteXamarin.ViewModel
 
         private void RegisterUser()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new Register());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new Register());
         }
 
         private async void LoginUserAsync()
@@ -53,7 +53,7 @@ namespace SQLiteXamarin.ViewModel
                         var jsonValueToSave = JsonConvert.SerializeObject(retrivedUser);
                         Application.Current.Properties["CurrentUser"] = jsonValueToSave;
                         await Application.Current.SavePropertiesAsync();                      
-                        Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new OwnerView());
+                        Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new OwnerView());
                     }
                 }
             }

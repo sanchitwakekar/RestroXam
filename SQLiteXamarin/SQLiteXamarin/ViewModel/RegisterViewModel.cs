@@ -39,7 +39,7 @@ namespace SQLiteXamarin.ViewModel
                 db = new DBHelper();
                 User user = new User() { username = _username, password = _password, role = _role };
                 DBHelper.AddUser(db, user);
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
             }
         }
 
