@@ -37,7 +37,7 @@ namespace SQLiteXamarin.Data
            .Where(x => x.username == user.username && x.password == user.password && x.role == user.role)
            .FirstOrDefault();
         }
-        //----------------------------------------------------
+        //------------------------------Owner Methods---------------------
         public static ObservableCollection<Restaurant> GetRestaurantList(DBHelper db, User user)
         {
             return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>()
@@ -84,6 +84,11 @@ namespace SQLiteXamarin.Data
             SQLiteConnection db = _db.GetConnection();
             db.Insert(item);
             db.Close();
+        }
+        //------------------------------User Methods---------------------
+        public static ObservableCollection<Restaurant> GetCustomerRestaurantList(DBHelper db)
+        {
+            return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>());           
         }
 
     }

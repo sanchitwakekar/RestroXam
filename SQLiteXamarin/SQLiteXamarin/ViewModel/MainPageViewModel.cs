@@ -55,6 +55,13 @@ namespace SQLiteXamarin.ViewModel
                         await Application.Current.SavePropertiesAsync();                      
                         Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new OwnerView());
                     }
+                    if (!retrivedUser.Equals(null) && retrivedUser.role.Equals("Customer"))
+                    {
+                        var jsonValueToSave = JsonConvert.SerializeObject(retrivedUser);
+                        Application.Current.Properties["CurrentUser"] = jsonValueToSave;
+                        await Application.Current.SavePropertiesAsync();
+                        Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new CustomerMainView());
+                    }
                 }
             }
             catch (NullReferenceException n)

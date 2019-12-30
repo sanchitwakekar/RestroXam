@@ -7,16 +7,18 @@
              x:Class="SQLiteXamarin.View.CustomerMainView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Menu"
+            <Label Text="Restaurants"
+                   FontSize="Large"
                    HorizontalOptions="CenterAndExpand" />
 
-            <ListView ItemsSource="{Binding MovieList}"
+            <ListView ItemsSource="{Binding RestaurantList}"
                       HasUnevenRows="true"
+                      x:Name="lst_Restaurants"
                       SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal"
+                            <!--<StackLayout Orientation="Horizontal"
                                          Margin="10,10,10,0">
                                 <Image Source="{Binding Poster}"
                                        Aspect="AspectFit"
@@ -30,7 +32,19 @@
                                 <Stepper Maximum="10"
                                          Increment="1"
                                          HorizontalOptions="EndAndExpand" />
-                                <!--ValueChanged="{Binding OnStepperValueChanged}"-->
+                                ValueChanged="{Binding OnStepperValueChanged}"
+                            </StackLayout>-->
+                            <StackLayout x:Name="Item">
+                                <Label HorizontalOptions="FillAndExpand"
+                                       Text="{Binding rest_name}"
+                                       FontSize="Large">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer BindingContext="{Binding Source={x:Reference lst_Restaurants}, Path=BindingContext}"
+                                                              Command="{Binding EnterRestaurant}"
+                                                              CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                              NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
