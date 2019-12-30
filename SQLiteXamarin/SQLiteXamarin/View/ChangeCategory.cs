@@ -11,7 +11,7 @@ namespace SQLiteXamarin.View
         protected override void Invoke(Picker sender)
         {
             CategoryViewModel cvm = new CategoryViewModel();
-            cvm.updateConditions(sender.SelectedItem.ToString());
+       //     cvm.updateConditions(sender.SelectedItem.ToString());
         }
     }
 }

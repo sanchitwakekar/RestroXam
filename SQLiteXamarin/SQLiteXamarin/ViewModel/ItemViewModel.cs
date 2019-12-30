@@ -16,15 +16,26 @@ namespace SQLiteXamarin.ViewModel
         private string _itemName;
         private int _itemPrice, _itemQuantity;
         private Restaurant _restaurant;
-        private Restaurant restaurant;
         private Category _category;
-        public ObservableCollection<string> RestaurantList { get; set; }
-        public ObservableCollection<string> CategoryList { get; set; }
+        public ObservableCollection<Restaurant> RestaurantList { get; set; }
+        //public ObservableCollection<Category> CategoryList { get; set; }
+
+        private ObservableCollection<Category> _CategoryList;
+        public ObservableCollection<Category> CategoryList
+        {
+            get { return _CategoryList; }
+            set
+            {
+                if (_CategoryList != value)
+                {
+                    _CategoryList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public Command _submit;
-
         ObservableCollection<Restaurant> restaurantlist;
-
         User user;
 
         public ItemViewModel()
@@ -32,33 +43,25 @@ namespace SQLiteXamarin.ViewModel
             user = MainPageViewModel.GetCurrentUser();
             Submit = new Command(SubmitItem);
             RestaurantList = GetAllRestaurants();
-           
-
         }
-        public ObservableCollection<string> GetAllRestaurants()
+        public ObservableCollection<Restaurant> GetAllRestaurants()
         {
             restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
             var restaurentNames = from r in restaurantlist
                                   select r.rest_name;
-            return (new ObservableCollection<string>(restaurentNames.ToList()));
+            return (restaurantlist);
         }
-
-        public void updateCategory(String rest)
+        public void getCategory(String rest)
         {
             SelectedRestaurant = restaurantlist.Where(st => st.rest_name.Equals(rest)).FirstOrDefault();
             try
             {
-                var categorylist = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant.rest_id);
-                var categoryNames = from r in categorylist
-                                    select r.cat_name;
-                CategoryList = new ObservableCollection<string>(categoryNames.ToList());
-               // return (new ObservableCollection<string>(categoryNames.ToList()));
+                CategoryList = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant.rest_id);
+              
+                // return (new ObservableCollection<string>(categoryNames.ToList()));
             }
             catch
-            {
-               
-            }
-          
+            { }
         }
         public ObservableCollection<string> GetAllCategory()
         {
@@ -74,7 +77,6 @@ namespace SQLiteXamarin.ViewModel
             {
                 return null;
             }
-           
         }
 
         private void SubmitItem()
@@ -83,7 +85,7 @@ namespace SQLiteXamarin.ViewModel
             {
                 if (!string.IsNullOrWhiteSpace(_itemName) && _itemPrice > 0 && _itemQuantity > 0 && !string.IsNullOrWhiteSpace(_restaurant.rest_name) && !string.IsNullOrWhiteSpace(_category.cat_name))
                 {
-                    
+                   
                 }
             }
             catch (NullReferenceException n)
@@ -136,8 +138,13 @@ namespace SQLiteXamarin.ViewModel
             }
             set
             {
-                
                 _restaurant = value;
+                try
+                {
+                    CategoryList = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant.rest_id);
+                }
+                catch
+                { }
             }
         }
         public Category SelectedCategory

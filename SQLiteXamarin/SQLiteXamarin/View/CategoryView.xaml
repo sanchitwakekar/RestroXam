@@ -12,13 +12,8 @@
                     TitleColor="Red"
                     ItemsSource="{Binding RestaurantList}"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding SelectedRestaurant}">
-                <Picker.Triggers>
-                    <EventTrigger Event="SelectedIndexChanged">
-                        <local:ChangeCategory />
-                    </EventTrigger>
-                </Picker.Triggers>
-            </Picker>
+                    ItemDisplayBinding="{Binding rest_name}"
+                    SelectedItem="{Binding SelectedRestaurant}" />
 
             <Entry Placeholder="Food Category"
                    HorizontalOptions="FillAndExpand"

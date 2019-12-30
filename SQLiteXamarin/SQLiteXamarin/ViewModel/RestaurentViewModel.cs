@@ -17,8 +17,8 @@ namespace SQLiteXamarin.ViewModel
         public Command _AddRestaurant;
         private Command<object> _ModifyRestaurant;
         User user;
-        private ObservableCollection<Model.Restaurant> _RestaurantList;
-        public ObservableCollection<Model.Restaurant> RestaurantList
+        private ObservableCollection<Restaurant> _RestaurantList;
+        public ObservableCollection<Restaurant> RestaurantList
         {
             get
             {

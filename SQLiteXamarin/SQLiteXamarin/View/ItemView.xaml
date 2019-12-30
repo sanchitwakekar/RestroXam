@@ -10,22 +10,16 @@
         <StackLayout>
             <Picker Title="Restaurant"
                     TitleColor="Red"
+                    x:Name="ResPicker"
                     ItemsSource="{Binding RestaurantList}"
                     HorizontalOptions="FillAndExpand"
-                    SelectedItem="{Binding SelectedRestaurant}" 
-                    >
-
-                <Picker.Triggers>
-                    <EventTrigger Event="SelectedIndexChanged">
-                        <local:LoadCategory />
-                    </EventTrigger>
-                </Picker.Triggers>
-                
-            </Picker>
+                    ItemDisplayBinding="{Binding rest_name}"
+                    SelectedItem="{Binding SelectedRestaurant}" />
 
             <Picker Title="Category"
-                    TitleColor="Red"
+                    TitleColor="Red"                    
                     ItemsSource="{Binding CategoryList}"
+                    ItemDisplayBinding="{Binding cat_name}"
                     HorizontalOptions="FillAndExpand"
                     SelectedItem="{Binding SelectedCategory}" />
 

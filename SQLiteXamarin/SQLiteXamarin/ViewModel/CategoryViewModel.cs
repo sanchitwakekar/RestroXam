@@ -18,6 +18,11 @@ namespace SQLiteXamarin.ViewModel
         private Restaurant _restaurant;
         public ObservableCollection<string> RestaurantList { get; set; }
         private ObservableCollection<Category> _categoryList { get; set; }
+        public ObservableCollection<string> categorynames { get; set; }
+        ObservableCollection<Restaurant> restaurantlist;
+        public Command _submit;
+        User user;
+
         public ObservableCollection<Category> CategoryList
         {
             get
@@ -31,23 +36,13 @@ namespace SQLiteXamarin.ViewModel
             }
         }
 
-        ObservableCollection<Restaurant> restaurantlist;
-        public Command _submit;
-        User user;
-
         public CategoryViewModel()
         {
             user = MainPageViewModel.GetCurrentUser();
             Submit = new Command(SubmitCategory);
-            //RestaurantList = new ObservableCollection<string>();
-            RestaurantList = GetAllRestaurants();                              
+            RestaurantList = GetAllRestaurants();
         }
-        public void updateConditions(string rest)
-        {
-            SelectedRestaurant = restaurantlist.Where(st => st.rest_name.Equals(rest)).FirstOrDefault();
-                                  
-            _categoryList = GetCategories(SelectedRestaurant);           
-        }
+       
         public ObservableCollection<string> GetAllRestaurants()
         {
             restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
@@ -56,28 +51,22 @@ namespace SQLiteXamarin.ViewModel
 
             return (new ObservableCollection<string>(restaurentNames.ToList()));
         }
-        public ObservableCollection<Category> GetCategories(Restaurant restaurant)
+        public void GetCategories(Restaurant restaurant)
         {
             try
-            {                
-                
-                                    
-
-           //     return (new ObservableCollection<string>(categoryNames.ToList()));
-                return null;
+            {
+                _categoryList = DBHelper.GetCategoryList(new DBHelper(), restaurant.rest_id);                           
             }
             catch (NotSupportedException nse)
             {
-                return new ObservableCollection<Category>();
+
             }
-
         }
-
         private void SubmitCategory()
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(_foodcategory) && !string.IsNullOrWhiteSpace(_restaurant.rest_name))
+                if (!string.IsNullOrWhiteSpace(_foodcategory) && !string.IsNullOrWhiteSpace(SelectedRestaurant.rest_name))
                 {
                     Category category = new Category() { rest_id = SelectedRestaurant.rest_id, cat_name = _foodcategory };
                     DBHelper.AddCategory(new DBHelper(), category);
@@ -111,7 +100,7 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _restaurant = value;
-                OnPropertyChanged();
+                GetCategories(_restaurant);
             }
         }
         public Command Submit
