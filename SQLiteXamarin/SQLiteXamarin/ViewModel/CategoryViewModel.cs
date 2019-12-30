@@ -16,13 +16,12 @@ namespace SQLiteXamarin.ViewModel
     {
         private string _foodcategory;
         private Restaurant _restaurant;
-        public ObservableCollection<string> RestaurantList { get; set; }
-        private ObservableCollection<Category> _categoryList { get; set; }
+        public ObservableCollection<Restaurant> RestaurantList { get; set; }
         public ObservableCollection<string> categorynames { get; set; }
         ObservableCollection<Restaurant> restaurantlist;
         public Command _submit;
         User user;
-
+        private ObservableCollection<Category> _categoryList;
         public ObservableCollection<Category> CategoryList
         {
             get
@@ -42,25 +41,23 @@ namespace SQLiteXamarin.ViewModel
             Submit = new Command(SubmitCategory);
             RestaurantList = GetAllRestaurants();
         }
-       
-        public ObservableCollection<string> GetAllRestaurants()
+
+        public ObservableCollection<Restaurant> GetAllRestaurants()
         {
             restaurantlist = DBHelper.GetRestaurantList(new DBHelper(), user);
             var restaurentNames = from r in restaurantlist
                                   select r.rest_name;
 
-            return (new ObservableCollection<string>(restaurentNames.ToList()));
+            return (new ObservableCollection<Restaurant>(restaurantlist));
         }
         public void GetCategories(Restaurant restaurant)
         {
             try
             {
-                _categoryList = DBHelper.GetCategoryList(new DBHelper(), restaurant.rest_id);                           
+                CategoryList = DBHelper.GetCategoryList(new DBHelper(), _restaurant.rest_id);
             }
             catch (NotSupportedException nse)
-            {
-
-            }
+            { }
         }
         private void SubmitCategory()
         {
@@ -74,9 +71,7 @@ namespace SQLiteXamarin.ViewModel
                 }
             }
             catch (NullReferenceException n)
-            {
-
-            }
+            { }
         }
 
         public string FoodCategory
@@ -100,7 +95,9 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _restaurant = value;
+
                 GetCategories(_restaurant);
+                OnPropertyChanged();
             }
         }
         public Command Submit
