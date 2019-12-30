@@ -85,11 +85,6 @@ namespace SQLiteXamarin.Data
             db.Insert(item);
             db.Close();
         }
-        //------------------------------User Methods---------------------
-        public static ObservableCollection<Restaurant> GetCustomerRestaurantList(DBHelper db)
-        {
-            return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>());           
-        }
 
         public static ObservableCollection<Item> GetItemList(DBHelper db, int cat_id)
         {
@@ -97,5 +92,10 @@ namespace SQLiteXamarin.Data
            .Where(x => x.cat_id == cat_id));
         }
 
+        //------------------------------User Methods---------------------
+        public static ObservableCollection<Restaurant> GetCustomerRestaurantList(DBHelper db)
+        {
+            return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>());           
+        }
     }
 }
