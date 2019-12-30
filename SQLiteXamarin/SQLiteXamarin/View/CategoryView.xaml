@@ -10,6 +10,7 @@
         <StackLayout>
             <Picker Title="Restaurant"
                     TitleColor="Red"
+                    x:Name="ResPicker"
                     ItemsSource="{Binding RestaurantList}"
                     HorizontalOptions="FillAndExpand"
            
@@ -33,8 +34,8 @@
                         <ViewCell>
                             <StackLayout Orientation="Horizontal"
                                          Margin="10,10,10,0"
-                                         x:Name="Item">
-                                <Label HorizontalOptions="StartAndExpand"
+                                         >
+                                <Label HorizontalOptions="FillAndExpand"
                                        Text="{Binding cat_name}"
                                        FontSize="Medium">
                                     <!--<Label.GestureRecognizers>

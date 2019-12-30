@@ -1,5 +1,6 @@
 ﻿using SQLiteXamarin.Data;
 using SQLiteXamarin.Model;
+using SQLiteXamarin.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,8 +19,6 @@ namespace SQLiteXamarin.ViewModel
         private Restaurant _restaurant;
         private Category _category;
         public ObservableCollection<Restaurant> RestaurantList { get; set; }
-        //public ObservableCollection<Category> CategoryList { get; set; }
-
         private ObservableCollection<Category> _CategoryList;
         public ObservableCollection<Category> CategoryList
         {
@@ -57,41 +56,32 @@ namespace SQLiteXamarin.ViewModel
             try
             {
                 CategoryList = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant.rest_id);
-              
-                // return (new ObservableCollection<string>(categoryNames.ToList()));
             }
             catch
             { }
         }
-        public ObservableCollection<string> GetAllCategory()
-        {
-            try
-            {
-                var categorylist = DBHelper.GetCategoryList(new DBHelper(), SelectedRestaurant.rest_id);
-                var categoryNames = from r in categorylist
-                                    select r.cat_name;
-
-                return (new ObservableCollection<string>(categoryNames.ToList()));
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
+      
         private void SubmitItem()
         {
             try
             {
                 if (!string.IsNullOrWhiteSpace(_itemName) && _itemPrice > 0 && _itemQuantity > 0 && !string.IsNullOrWhiteSpace(_restaurant.rest_name) && !string.IsNullOrWhiteSpace(_category.cat_name))
                 {
-                   
+                    Item item = new Item()
+                    {
+                        item_name = _itemName,
+                        price = _itemPrice,
+                        quantity = _itemQuantity,
+                        cat_id = SelectedCategory.cat_id,
+                        rest_id = SelectedRestaurant.rest_id
+                    };
+                    DBHelper.AddItem(new DBHelper(), item);
+                    Xamarin.Forms.Application.Current.MainPage.Navigation.PopModalAsync();
+                    Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new OwnerView());
                 }
             }
             catch (NullReferenceException n)
-            {
-
-            }
+            {}
         }
 
         public string ItemName
