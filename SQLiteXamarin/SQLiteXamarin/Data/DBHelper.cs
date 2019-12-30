@@ -91,6 +91,11 @@ namespace SQLiteXamarin.Data
             return new ObservableCollection<Item>(db.GetConnection().Table<Item>()
            .Where(x => x.cat_id == cat_id));
         }
+        public static ObservableCollection<Item> GetUserRestaurantItemList(DBHelper db, int rest_id)
+        {
+            return new ObservableCollection<Item>(db.GetConnection().Table<Item>()
+           .Where(x => x.rest_id == rest_id));
+        }
 
         //------------------------------User Methods---------------------
         public static ObservableCollection<Restaurant> GetCustomerRestaurantList(DBHelper db)
