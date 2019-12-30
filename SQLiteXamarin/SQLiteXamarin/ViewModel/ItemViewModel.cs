@@ -20,6 +20,8 @@ namespace SQLiteXamarin.ViewModel
         private Category _category;
         public ObservableCollection<Restaurant> RestaurantList { get; set; }
         private ObservableCollection<Category> _CategoryList;
+        private ObservableCollection<Item> _ItemList;
+
         public ObservableCollection<Category> CategoryList
         {
             get { return _CategoryList; }
@@ -28,6 +30,19 @@ namespace SQLiteXamarin.ViewModel
                 if (_CategoryList != value)
                 {
                     _CategoryList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public ObservableCollection<Item> ItemList
+        {
+            get { return _ItemList; }
+            set
+            {
+                if (_ItemList != value)
+                {
+                    _ItemList = value;
                     OnPropertyChanged();
                 }
             }
@@ -146,6 +161,12 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _category = value;
+                try
+                {
+                    ItemList = DBHelper.GetItemList(new DBHelper(), SelectedCategory.cat_id);
+                }
+                catch
+                { }
             }
         }
         public Command Submit

@@ -86,5 +86,11 @@ namespace SQLiteXamarin.Data
             db.Close();
         }
 
+        public static ObservableCollection<Item> GetItemList(DBHelper db, int cat_id)
+        {
+            return new ObservableCollection<Item>(db.GetConnection().Table<Item>()
+           .Where(x => x.cat_id == cat_id));
+        }
+
     }
 }
