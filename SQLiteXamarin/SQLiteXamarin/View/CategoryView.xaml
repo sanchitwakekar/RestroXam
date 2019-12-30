@@ -13,7 +13,7 @@
                     x:Name="ResPicker"
                     ItemsSource="{Binding RestaurantList}"
                     HorizontalOptions="FillAndExpand"
-           
+                    ItemDisplayBinding="{Binding rest_name}"
                     SelectedItem="{Binding SelectedRestaurant}" />
 
             <Entry Placeholder="Food Category"
