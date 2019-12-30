@@ -6,10 +6,53 @@
              mc:Ignorable="d"
              x:Class="SQLiteXamarin.View.CustomerResturantView">
     <ContentPage.Content>
+
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Restaurants"
+                   FontSize="Large"
+                   HorizontalOptions="CenterAndExpand" />
+
+            <ListView ItemsSource="{Binding ItemList}"
+                      HasUnevenRows="true"
+                      x:Name="lst_Restaurants"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="FillAndExpand"
+                                         Margin="10,10,10,0">
+                                <Label HorizontalOptions="FillAndExpand"
+                                       WidthRequest="15"
+                                       HeightRequest="15"
+                                       Text="{Binding item_name}"
+                                       FontSize="Large" />
+                                <Label HorizontalOptions="CenterAndExpand"
+                                       Text="{Binding price}"
+                                       FontSize="Medium" />
+                                <Stepper Maximum="10"
+                                         HorizontalOptions="CenterAndExpand"
+                                         Increment="1"
+                                         Value="{Binding OnStepperValueChanged}" />
+
+                            </StackLayout>
+                            <!--<StackLayout x:Name="Item">
+                                <Label HorizontalOptions="FillAndExpand"
+                                       Text="{Binding rest_name}"
+                                       FontSize="Large">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer BindingContext="{Binding Source={x:Reference lst_Restaurants}, Path=BindingContext}"
+                                                              Command="{Binding EnterRestaurant}"
+                                                              CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                              NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>-->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

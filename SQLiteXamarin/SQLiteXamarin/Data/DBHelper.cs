@@ -90,11 +90,15 @@ namespace SQLiteXamarin.Data
         {
             return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>());           
         }
-
         public static ObservableCollection<Item> GetItemList(DBHelper db, int cat_id)
         {
             return new ObservableCollection<Item>(db.GetConnection().Table<Item>()
            .Where(x => x.cat_id == cat_id));
+        }
+        public static ObservableCollection<Item> GetUserRestaurantItemList(DBHelper db, int rest_id)
+        {
+            return new ObservableCollection<Item>(db.GetConnection().Table<Item>()
+           .Where(x => x.rest_id == rest_id));
         }
 
     }
