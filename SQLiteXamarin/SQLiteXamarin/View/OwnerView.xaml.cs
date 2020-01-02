@@ -19,5 +19,10 @@ namespace SQLiteXamarin.View
             InitializeComponent();
             this.BindingContext = new OwnerViewModel();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
     }
 }

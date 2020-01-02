@@ -14,16 +14,23 @@ namespace SQLiteXamarin.ViewModel
     class CustomerMainViewModel : INotifyPropertyChanged
     {
         private Command<object> _EnterRestaurant;
+        public Command _Logout;
         private ObservableCollection<Restaurant> _RestaurantList;
         public CustomerMainViewModel()
         {
             RestaurantList = DBHelper.GetCustomerRestaurantList(new DBHelper());
             EnterRestaurant = new Command<object>(EnterRestaurantPage);
+            Logout = new Command(UserLogout);
         }
         private void EnterRestaurantPage(object obj)
         {
             var itemData = obj as Restaurant;
             Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new CustomerResturantView(itemData));
+        }
+
+        private void UserLogout()
+        {
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
         }
         public ObservableCollection<Restaurant> RestaurantList
         {
@@ -46,6 +53,18 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _EnterRestaurant = value;
+            }
+        }
+
+        public Command Logout
+        {
+            get
+            {
+                return _Logout;
+            }
+            set
+            {
+                _Logout = value;
             }
         }
 

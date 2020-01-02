@@ -42,7 +42,7 @@ namespace SQLiteXamarin.ViewModel
 
         private void UserLogout()
         {
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new CategoryView());
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
         }
 
         public Command Restaurant
