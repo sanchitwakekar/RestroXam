@@ -51,6 +51,8 @@
                 </ListView.ItemTemplate>
 
             </ListView>
+            <Button Text="LOGOUT"
+                        Command="{Binding Logout}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
