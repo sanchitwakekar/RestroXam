@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace SQLiteXamarin.ViewModel
 {
@@ -19,48 +20,46 @@ namespace SQLiteXamarin.ViewModel
         private ObservableCollection<Item> _itemList;
         private int _itemCount, _cartTotal;
         private Item cartItem;
-        private Command<object> _AddItem;
-        private Command _increament, _decreament;
-        private List<Item> addedItemList;
+        private Command<object> _AddItem;        
+        private ObservableCollection<Item> _addedItemList;
 
         public CustomerRestaurantViewModel(Restaurant _CustomerRestaurant)
         {
             _itemList = DBHelper.GetUserRestaurantItemList(new DBHelper(), _CustomerRestaurant.rest_id);
+            _itemList.ForEach(i =>
+            {
+                i.quantity = 0;
+            });
             _AddItem = new Command<object>(AddItemToCart);
-            _increament = new Command(increasesteppervalue);
-            _decreament = new Command(decreasesteppervalue);
-            addedItemList = new List<Item>();
+            _addedItemList = new ObservableCollection<Item>();
         }
 
-        private void decreasesteppervalue()
-        {
-            _onStepperValueChanged++;
-        }
 
-        private void increasesteppervalue()
-        {
-            _onStepperValueChanged--;
-        }
 
         private void AddItemToCart(object obj)
         {
-            addedItemList.Add(obj as Item);
-            //Cart cart = new Cart()
-            //{
-            //    item = JsonConvert.SerializeObject(addedItemList.ToArray()),
-            //    cart_total = calculateTotal(addedItemList),
-            //    user_id = MainPageViewModel.GetCurrentUser().user_id,
-            //};
-            //DBHelper.AddItemToCart(new DBHelper(),cart);
-            //Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new PlaceOrderView(cart));
+            var deleteSame = _addedItemList.FirstOrDefault(cus => cus.item_id == (obj as Item).item_id);
+            _addedItemList.Remove(deleteSame);
+            if ((obj as Item).quantity > 0)
+            {
+                _addedItemList.Add(obj as Item);
+            }
+            Cart cart = new Cart()
+            {
+                item = JsonConvert.SerializeObject(_addedItemList.ToArray()),
+                cart_total = calculateTotal(_addedItemList),
+                user_id = MainPageViewModel.GetCurrentUser().user_id,
+            };
+            DBHelper.AddItemToCart(new DBHelper(), cart);
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new PlaceOrderView(cart));
         }
-        private int calculateTotal(List<Item> addedItemList)
+        private int calculateTotal(ObservableCollection<Item> addedItemList)
         {
             var itemPrices = (from x in addedItemList select x.price);
             var itemQuantity = (from x in addedItemList select x.quantity);
             int dotProduct = itemPrices.Zip(itemQuantity, (d1, d2) => d1 * d2).Sum();
-            _cartTotal = addedItemList.Count();
-            _itemCount = dotProduct;
+            _cartTotal = dotProduct ;
+            _itemCount = addedItemList.Count();
             return dotProduct;
         }
         public int ItemCount
@@ -96,28 +95,7 @@ namespace SQLiteXamarin.ViewModel
                 AddItem = value;
             }
         }
-        public Command Increament
-        {
-            get
-            {
-                return _increament;
-            }
-            set
-            {
-                _increament = value;
-            }
-        }
-        public Command Decreament
-        {
-            get
-            {
-                return _decreament;
-            }
-            set
-            {
-                _decreament = value;
-            }
-        }
+
         public ObservableCollection<Item> ItemList
         {
             get
@@ -129,6 +107,17 @@ namespace SQLiteXamarin.ViewModel
                 _itemList = value;
             }
         }
+        public ObservableCollection<Item> AddedItemList
+        {
+            get
+            {
+                return _addedItemList;
+            }
+            set
+            {
+                _addedItemList = value;
+            }
+        }
         public int OnStepperValueChanged
         {
             get
@@ -138,7 +127,8 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _onStepperValueChanged = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("OnStepperValueChanged"));
+                OnPropertyChanged("AddItem");
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddItem"));
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

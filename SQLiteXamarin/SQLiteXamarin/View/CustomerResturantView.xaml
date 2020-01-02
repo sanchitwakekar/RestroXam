@@ -8,10 +8,8 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <Stepper Maximum="10"
-                     HorizontalOptions="CenterAndExpand"
-                     Increment="1"
-                     Value="{Binding OnStepperValueChanged,Mode=TwoWay}" />
+
+
             <Label Text="Restaurants"
                    FontSize="Large"
                    HorizontalOptions="CenterAndExpand" />
@@ -22,48 +20,59 @@
                       SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>                          
-                                <StackLayout Orientation="Horizontal"
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
                                          HorizontalOptions="FillAndExpand"
                                          x:Name="Item"
                                          Spacing="5"
                                          WidthRequest="40"
-                                         HeightRequest="40"                                              
+                                         HeightRequest="40"
                                          Padding="10,10,10,10">
-                               
-                                    <Label HorizontalOptions="StartAndExpand"
-                                           Text="{Binding item_name}"
-                                           FontSize="Large" />
-                                
+
+                                <Label HorizontalOptions="StartAndExpand"
+                                       Text="{Binding item_name}"
+                                       FontSize="Large" />
+
                                 <Label WidthRequest="30"
                                        HorizontalOptions="CenterAndExpand"
                                        Text="{Binding price}"
                                        FontSize="Medium" />
 
-                                <StackLayout           
-                                    Orientation="Horizontal"
-                                    Spacing="10"
-                                    HeightRequest="50"
+                                <!--<StackLayout Orientation="Horizontal"
+                                             Spacing="10"
+                                             x:Name="Items"
+                                             HeightRequest="50"
                                              HorizontalOptions="EndAndExpand">
-                                    
+
                                     <Button Text="+"
                                             Command="{Binding Increament}"
                                             WidthRequest="40"
                                             HeightRequest="40"
                                             BorderRadius="20" />
 
-                                    <Label HorizontalOptions="CenterAndExpand"                                           
+                                    <Label HorizontalOptions="CenterAndExpand"
                                            Padding="0,10,0,0"
                                            Text="{Binding OnStepperValueChanged}"
                                            FontSize="Medium" />
-
+                                  
                                     <Button Text="-"
                                             Command="{Binding Decreament}"
                                             WidthRequest="40"
+                                            x:Name="DecreamentButton"
                                             HeightRequest="40"
                                             BorderRadius="20" />
-                                </StackLayout>
-                                
+                                  
+                                </StackLayout>-->
+                                <Stepper Maximum="10"
+                                         HorizontalOptions="CenterAndExpand"
+                                         Increment="1"
+                                         x:Name="ItemQuantity"
+                                         Value="{Binding quantity,Mode=TwoWay}"
+                                         BindingContext="{Binding Source={x:Reference Item}, Path=BindingContext}"                                         
+                                         />
+                                <Label Text="{Binding quantity}"
+                                       BindingContext="{Binding Source={x:Reference Item}, Path=BindingContext}" />
+
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer BindingContext="{Binding Source={x:Reference lst_Items}, Path=BindingContext}"
                                                           Command="{Binding AddItem}"
