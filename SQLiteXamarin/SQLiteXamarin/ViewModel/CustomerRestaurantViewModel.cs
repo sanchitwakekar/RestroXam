@@ -18,14 +18,16 @@ namespace SQLiteXamarin.ViewModel
     {
         private int _onStepperValueChanged = 0;
         private ObservableCollection<Item> _itemList;
-        private int _itemCount, _cartTotal;        
+        private int _itemCount, _cartTotal;
         private Command<object> _AddItem;
         private ObservableCollection<Item> _addedItemList;
         private Command _viewCart;
         Cart cart;
+        Restaurant rest;
 
         public CustomerRestaurantViewModel(Restaurant _CustomerRestaurant)
         {
+            rest = _CustomerRestaurant;
             _itemList = DBHelper.GetUserRestaurantItemList(new DBHelper(), _CustomerRestaurant.rest_id);
             _itemList.ForEach(i =>
             {
@@ -51,10 +53,14 @@ namespace SQLiteXamarin.ViewModel
             }
             cart = new Cart()
             {
-                item = JsonConvert.SerializeObject(_addedItemList.ToArray()),
+                // item = JsonConvert.SerializeObject(_addedItemList.ToArray()),
                 cart_total = calculateTotal(_addedItemList),
                 user_id = MainPageViewModel.GetCurrentUser().user_id,
-            };                    
+                rest_id = rest.rest_id,
+                rest_name = rest.rest_name,
+                item_count = _itemCount,
+                cartItems = _addedItemList,
+            };
         }
         private int calculateTotal(ObservableCollection<Item> addedItemList)
         {

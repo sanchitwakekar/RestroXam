@@ -24,7 +24,6 @@ namespace SQLiteXamarin.Data
             db.CreateTable<Restaurant>();
             db.CreateTable<Category>();
             db.CreateTable<Item>();
-            db.CreateTable<Cart>();
             db.CreateTable<Order>();
         }
         public static void AddUser(DBHelper _db, User user)
@@ -102,12 +101,18 @@ namespace SQLiteXamarin.Data
         //------------------------------User Methods---------------------
         public static ObservableCollection<Restaurant> GetCustomerRestaurantList(DBHelper db)
         {
-            return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>());           
+            return new ObservableCollection<Restaurant>(db.GetConnection().Table<Restaurant>());
         }
-        public static void AddItemToCart(DBHelper _db,Cart cart)
+        public static void AddItemToCart(DBHelper _db, Cart cart)
         {
             SQLiteConnection db = _db.GetConnection();
             db.Insert(cart);
+            db.Close();
+        }
+        public static void CartToOrder(DBHelper _db, Order order)
+        {
+            SQLiteConnection db = _db.GetConnection();
+            db.Insert(order);
             db.Close();
         }
     }

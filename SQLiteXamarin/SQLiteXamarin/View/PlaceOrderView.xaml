@@ -6,20 +6,25 @@
              mc:Ignorable="d"
              x:Class="SQLiteXamarin.View.PlaceOrderView">
     <ContentPage.Content>
-        <StackLayout >
-            <Label Text="Cart"          
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout>
+            <Label Text="{Binding RestaurantName}"
+                   FontSize="Header"
+                   HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="Order Details"
+                   FontSize="Large"
+                   HorizontalOptions="CenterAndExpand" />
 
             <BoxView   VerticalOptions="Center"
                        HorizontalOptions="Center"
                        HeightRequest="1"
-                       WidthRequest="50"
-                       Color="#5b5d68" />
-            
+                       WidthRequest="100"
+                       Color="#000" />
+
             <ListView ItemsSource="{Binding OrderItemList}"
                       HasUnevenRows="true"
                       x:Name="lst_Items"
-                      SeparatorVisibility="None">                
+                      SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -39,9 +44,8 @@
                                        HorizontalOptions="CenterAndExpand"
                                        Text="{Binding quantity}"
                                        FontSize="Medium" />
-                                
-                                <Label
-                                       HorizontalOptions="CenterAndExpand"
+
+                                <Label HorizontalOptions="CenterAndExpand"
                                        Text="x"
                                        FontSize="Medium" />
 
@@ -54,17 +58,17 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
             <BoxView   HorizontalOptions="FillAndExpand"
                        HeightRequest="1"
                        WidthRequest="50"
                        Color="#000" />
-            
-            <Entry Text="{Binding Address}"                   
+
+            <Entry Text="{Binding Address}"
                    Margin="10,10,10,10"
                    Placeholder="Address"
                    HorizontalOptions="FillAndExpand" />
-            
+
             <Entry Text="{Binding PhoneNumber}"
                    Margin="10,10,10,10"
                    Placeholder="Phone Number"

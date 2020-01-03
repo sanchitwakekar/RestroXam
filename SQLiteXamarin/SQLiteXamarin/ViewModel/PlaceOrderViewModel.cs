@@ -16,16 +16,26 @@ namespace SQLiteXamarin.ViewModel
     class PlaceOrderViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Item> _orderItemList;
-        private int _quantity, _orderTotal,_itemTotal;
-        private string _Address, _PhoneNumber;
+        private int _quantity, _orderTotal, _itemTotal;
+        private string _Address, _PhoneNumber, _restName;
         Command _PlaceOrder;
         Order o;
+        Cart cart;
 
         public PlaceOrderViewModel(Cart c)
         {
             var ordercart = c;
-            _orderItemList = JsonConvert.DeserializeObject<ObservableCollection<Item>>(c.item);
-            _itemTotal = calculateTotal(_orderItemList);
+            //_orderItemList = JsonConvert.DeserializeObject<ObservableCollection<Item>>(c.item);
+            _orderItemList = c.cartItems;
+            _itemTotal = c.cart_total;
+            
+            //cart_total = calculateTotal(_addedItemList),
+            //    user_id = MainPageViewModel.GetCurrentUser().user_id,
+            //    rest_id = rest.rest_id,
+            //    rest_name = rest.rest_name,
+            //    item_count = _itemCount,
+
+
             PlaceOrder = new Command(PlaceUserOrders);
         }
         private int calculateTotal(ObservableCollection<Item> addedItemList)
@@ -34,14 +44,14 @@ namespace SQLiteXamarin.ViewModel
             var itemQuantity = (from x in _orderItemList select x.quantity);
             int dotProduct = itemPrices.Zip(itemQuantity, (d1, d2) => d1 * d2).Sum();
             _orderTotal = dotProduct;
-            _quantity = _orderItemList.Count();            
+            _quantity = _orderItemList.Count();
             return dotProduct;
         }
         private void PlaceUserOrders()
         {
-            if(!string.IsNullOrWhiteSpace(_Address) && !string.IsNullOrWhiteSpace(_PhoneNumber))
+            if (!string.IsNullOrWhiteSpace(_Address) && !string.IsNullOrWhiteSpace(_PhoneNumber))
             {
-                
+                DBHelper.CartToOrder(new DBHelper(), o);
             }
         }
 
@@ -89,6 +99,11 @@ namespace SQLiteXamarin.ViewModel
         {
             get { return _Address; }
             set { _Address = value; }
+        }
+        public string RestaurantName
+        {
+            get { return _restName; }
+            set { _restName = value; }
         }
 
         public string PhoneNumber
