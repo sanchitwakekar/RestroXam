@@ -18,10 +18,11 @@ namespace SQLiteXamarin.ViewModel
     {
         private int _onStepperValueChanged = 0;
         private ObservableCollection<Item> _itemList;
-        private int _itemCount, _cartTotal;
-        private Item cartItem;
-        private Command<object> _AddItem;        
+        private int _itemCount, _cartTotal;        
+        private Command<object> _AddItem;
         private ObservableCollection<Item> _addedItemList;
+        private Command _viewCart;
+        Cart cart;
 
         public CustomerRestaurantViewModel(Restaurant _CustomerRestaurant)
         {
@@ -32,9 +33,13 @@ namespace SQLiteXamarin.ViewModel
             });
             _AddItem = new Command<object>(AddItemToCart);
             _addedItemList = new ObservableCollection<Item>();
+            _viewCart = new Command(ViewCartPage);
         }
 
-
+        private void ViewCartPage(object obj)
+        {
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new PlaceOrderView(cart));
+        }
 
         private void AddItemToCart(object obj)
         {
@@ -44,21 +49,19 @@ namespace SQLiteXamarin.ViewModel
             {
                 _addedItemList.Add(obj as Item);
             }
-            Cart cart = new Cart()
+            cart = new Cart()
             {
                 item = JsonConvert.SerializeObject(_addedItemList.ToArray()),
                 cart_total = calculateTotal(_addedItemList),
                 user_id = MainPageViewModel.GetCurrentUser().user_id,
-            };
-            DBHelper.AddItemToCart(new DBHelper(), cart);
-            Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new PlaceOrderView(cart));
+            };                    
         }
         private int calculateTotal(ObservableCollection<Item> addedItemList)
         {
             var itemPrices = (from x in addedItemList select x.price);
             var itemQuantity = (from x in addedItemList select x.quantity);
             int dotProduct = itemPrices.Zip(itemQuantity, (d1, d2) => d1 * d2).Sum();
-            _cartTotal = dotProduct ;
+            _cartTotal = dotProduct;
             _itemCount = addedItemList.Count();
             return dotProduct;
         }
@@ -71,6 +74,7 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _itemCount = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ItemCount"));
             }
         }
         public int CartTotal
@@ -82,6 +86,7 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _cartTotal = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CartTotal"));
             }
         }
         public Command<Object> AddItem
@@ -93,6 +98,17 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 AddItem = value;
+            }
+        }
+        public Command ViewCart
+        {
+            get
+            {
+                return _viewCart;
+            }
+            set
+            {
+                _viewCart = value;
             }
         }
 

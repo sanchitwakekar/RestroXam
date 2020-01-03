@@ -6,10 +6,63 @@
              mc:Ignorable="d"
              x:Class="SQLiteXamarin.View.PlaceOrderView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
+        <StackLayout >
+            <Label Text="Cart"          
                 HorizontalOptions="CenterAndExpand" />
+
+            <BoxView   VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HeightRequest="1"
+                       WidthRequest="50"
+                       Color="#5b5d68" />
+            
+            <ListView ItemsSource="{Binding OrderItemList}"
+                      HasUnevenRows="true"
+                      x:Name="lst_Items"
+                      SeparatorVisibility="None">                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="FillAndExpand"
+                                         x:Name="Item"
+                                         Spacing="5"
+                                         WidthRequest="40"
+                                         HeightRequest="40"
+                                         Padding="10,10,10,10">
+
+                                <Label HorizontalOptions="StartAndExpand"
+                                       Text="{Binding item_name}"
+                                       FontSize="Large" />
+
+                                <Label WidthRequest="30"
+                                       HorizontalOptions="CenterAndExpand"
+                                       Text="{Binding quantity}"
+                                       FontSize="Medium" />
+                                
+                                <Label
+                                       HorizontalOptions="CenterAndExpand"
+                                       Text="x"
+                                       FontSize="Medium" />
+
+                                <Label WidthRequest="30"
+                                       HorizontalOptions="CenterAndExpand"
+                                       Text="{Binding price}"
+                                       FontSize="Medium" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <BoxView   VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       HeightRequest="1"
+                       WidthRequest="50"
+                       Color="#000" />
+            
+            <Entry Text="{Binding Address}"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

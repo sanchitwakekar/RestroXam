@@ -14,6 +14,7 @@ namespace SQLiteXamarin.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PlaceOrderView : ContentPage
     {
+      
         public PlaceOrderView(Cart c)
         {
             InitializeComponent();
