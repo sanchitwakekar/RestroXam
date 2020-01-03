@@ -51,8 +51,19 @@
                 </ListView.ItemTemplate>
 
             </ListView>
-            <Button Text="LOGOUT"
+            <StackLayout Orientation="Horizontal">
+                <Button Text="LOGOUT"
+                        Margin="5"
+                        HorizontalOptions="FillAndExpand"
                         Command="{Binding Logout}" />
+
+                <Button Text="ORDERS"
+                        Margin="5"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding Orders}" />
+
+            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
