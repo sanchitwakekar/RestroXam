@@ -54,15 +54,27 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <BoxView   VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="CenterAndExpand"
+            
+            <BoxView   HorizontalOptions="FillAndExpand"
                        HeightRequest="1"
                        WidthRequest="50"
                        Color="#000" />
             
-            <Entry Text="{Binding Address}"
-                   VerticalOptions="FillAndExpand"
+            <Entry Text="{Binding Address}"                   
+                   Margin="10,10,10,10"
+                   Placeholder="Address"
                    HorizontalOptions="FillAndExpand" />
+            
+            <Entry Text="{Binding PhoneNumber}"
+                   Margin="10,10,10,10"
+                   Placeholder="Phone Number"
+                   HorizontalOptions="FillAndExpand" />
+
+            <Button Text="Place Order"
+                    Command="{Binding PlaceOrder}"
+                    Margin="10,10,10,10"
+                    HorizontalOptions="FillAndExpand" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
