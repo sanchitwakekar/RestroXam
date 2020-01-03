@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="{Binding RestaurantName}"
-                   FontSize="Header"
+                   FontSize="Title"
                    HorizontalOptions="CenterAndExpand" />
 
             <Label Text="Order Details"
@@ -63,6 +63,7 @@
                        HeightRequest="1"
                        WidthRequest="50"
                        Color="#000" />
+            <StackLayout VerticalOptions="EndAndExpand">
 
             <Entry Text="{Binding Address}"
                    Margin="10,10,10,10"
@@ -78,7 +79,7 @@
                     Command="{Binding PlaceOrder}"
                     Margin="10,10,10,10"
                     HorizontalOptions="FillAndExpand" />
-
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

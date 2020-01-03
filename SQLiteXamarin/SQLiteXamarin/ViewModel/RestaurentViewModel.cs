@@ -21,7 +21,7 @@ namespace SQLiteXamarin.ViewModel
        
         public RestaurentViewModel()
         {
-            user = MainPageViewModel.GetCurrentUser(); ;
+            user = MainPageViewModel.GetCurrentUser(); 
             AddRestaurant = new Command(AddRestaurantPage);
             ModifyRestaurant = new Command<object>(ModifyRestaurantPage);
             RestaurantList = DBHelper.GetRestaurantList(new DBHelper(), user);

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SQLiteXamarin.Data;
 using SQLiteXamarin.Model;
+using SQLiteXamarin.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,18 +25,16 @@ namespace SQLiteXamarin.ViewModel
 
         public PlaceOrderViewModel(Cart c)
         {
-            var ordercart = c;
+            cart = c;
             //_orderItemList = JsonConvert.DeserializeObject<ObservableCollection<Item>>(c.item);
             _orderItemList = c.cartItems;
             _itemTotal = c.cart_total;
-            
+            _restName = c.rest_name;
             //cart_total = calculateTotal(_addedItemList),
             //    user_id = MainPageViewModel.GetCurrentUser().user_id,
             //    rest_id = rest.rest_id,
             //    rest_name = rest.rest_name,
-            //    item_count = _itemCount,
-
-
+            //    item_count = _itemCount,            
             PlaceOrder = new Command(PlaceUserOrders);
         }
         private int calculateTotal(ObservableCollection<Item> addedItemList)
@@ -51,7 +50,16 @@ namespace SQLiteXamarin.ViewModel
         {
             if (!string.IsNullOrWhiteSpace(_Address) && !string.IsNullOrWhiteSpace(_PhoneNumber))
             {
+                o = new Order()
+                {
+                    ordertime = DateTime.UtcNow,
+                    Phone_no = _PhoneNumber,
+                    order_address = _Address,
+                    cart = JsonConvert.SerializeObject(this.cart.cartItems),
+                    user_id = cart.user_id,
+                };
                 DBHelper.CartToOrder(new DBHelper(), o);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new CustomerMainView());
             }
         }
 

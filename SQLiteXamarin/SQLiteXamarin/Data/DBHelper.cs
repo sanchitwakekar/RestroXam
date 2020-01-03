@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using SQLiteXamarin.Model;
+using SQLiteXamarin.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -114,6 +115,12 @@ namespace SQLiteXamarin.Data
             SQLiteConnection db = _db.GetConnection();
             db.Insert(order);
             db.Close();
+        }
+        public static ObservableCollection<Order> GetUserOrder(DBHelper db){            
+            User user = MainPageViewModel.GetCurrentUser();
+            return new ObservableCollection<Order>(db.GetConnection().Table<Order>()
+            .Where(x => x.user_id == user.user_id));
+            
         }
     }
 }
