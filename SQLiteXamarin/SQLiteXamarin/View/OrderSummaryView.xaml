@@ -7,9 +7,35 @@
              x:Class="SQLiteXamarin.View.OrderSummaryView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <ListView ItemsSource="{Binding ItemList}"
+                      HasUnevenRows="true"
+                      x:Name="lst_Category"
+                      SeparatorVisibility="None">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
+                                         Margin="10,10,10,0">
+                                <Label HorizontalOptions="FillAndExpand"
+                                       Text="{Binding item_name}"
+                                       FontSize="Medium">
+                                </Label>
+                                <Label HorizontalOptions="FillAndExpand"
+                                       Text="{Binding price}"
+                                       FontSize="Medium">
+                                </Label>
+                                <Label HorizontalOptions="FillAndExpand"
+                                       Text="{Binding quantity}"
+                                       FontSize="Medium">
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

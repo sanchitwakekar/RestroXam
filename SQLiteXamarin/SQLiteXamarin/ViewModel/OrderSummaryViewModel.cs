@@ -6,5 +6,6 @@ namespace SQLiteXamarin.ViewModel
 {
     class OrderSummaryViewModel
     {
+
     }
 }
