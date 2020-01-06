@@ -29,11 +29,13 @@ namespace SQLiteXamarin.ViewModel
        
         private void AddRestaurantPage()
         {
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
             Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new AddRestaurantView());
         }
         private void ModifyRestaurantPage(object obj)
         {           
-            var itemData = obj as Restaurant;                          
+            var itemData = obj as Restaurant;
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
             Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new RestaurantDetailView(itemData));
         }
         public ObservableCollection<Restaurant> RestaurantList
