@@ -36,6 +36,7 @@ namespace SQLiteXamarin.ViewModel
             _AddItem = new Command<object>(AddItemToCart);
             _addedItemList = new ObservableCollection<Item>();
             _viewCart = new Command(ViewCartPage);
+          //  DBHelper.deleteEntries(new DBHelper());
         }
 
         private void ViewCartPage(object obj)

@@ -1,5 +1,6 @@
 ﻿using SQLiteXamarin.Data;
 using SQLiteXamarin.Model;
+using SQLiteXamarin.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +34,7 @@ namespace SQLiteXamarin.ViewModel
                 };
                 DBHelper.AddRestaurant(new DBHelper(), rest);
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new RestaurantView());
             }
         }
         public string RestaurantArea

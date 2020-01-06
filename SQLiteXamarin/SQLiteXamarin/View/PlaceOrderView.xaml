@@ -63,6 +63,7 @@
                        HeightRequest="1"
                        WidthRequest="50"
                        Color="#000" />
+            
             <StackLayout VerticalOptions="EndAndExpand">
 
             <Entry Text="{Binding Address}"

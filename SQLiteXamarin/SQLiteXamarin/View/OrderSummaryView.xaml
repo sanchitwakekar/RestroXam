@@ -6,30 +6,67 @@
              mc:Ignorable="d"
              x:Class="SQLiteXamarin.View.OrderSummaryView">
     <ContentPage.Content>
-        <StackLayout>
+         <StackLayout>
 
-            <ListView ItemsSource="{Binding ItemList}"
+            <ListView ItemsSource="{Binding CartItemList}"
                       HasUnevenRows="true"
-                      x:Name="lst_Category"
+                      VerticalOptions="Start"
+                      x:Name="lst_Order"
                       SeparatorVisibility="None">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal"
+                            <StackLayout Orientation="Vertical"
+                                         VerticalOptions="Start"
                                          Margin="10,10,10,0">
                                 <Label HorizontalOptions="FillAndExpand"
-                                       Text="{Binding item_name}"
+                                       Text="{Binding rest_name}"
                                        FontSize="Medium">
                                 </Label>
-                                <Label HorizontalOptions="FillAndExpand"
+
+                                <ListView ItemsSource="{Binding cartItems}"
+                                          HasUnevenRows="true"
+                                          x:Name="lst_Order"
+                                          VerticalOptions="Center"
+                                          SeparatorVisibility="None">
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal"
+                                                             VerticalOptions="Start"
+                                                             Margin="10,10,10,0">
+                                                    <Label HorizontalOptions="FillAndExpand"
+                                                           Text="{Binding item_name}"
+                                                           FontSize="Medium">
+                                                    </Label>
+                                                    <Label HorizontalOptions="FillAndExpand"
+                                                           Text="{Binding price}"
+                                                           FontSize="Medium">
+                                                    </Label>
+                                                    <Label HorizontalOptions="FillAndExpand"
+                                                           Text="{Binding quantity}"
+                                                           FontSize="Medium">
+                                                    </Label>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                
+                                <BoxView   HorizontalOptions="FillAndExpand"
+                                           HeightRequest="1"
+                                           WidthRequest="50"
+                                           Color="#000" />
+                                <!--<Label HorizontalOptions="FillAndExpand"
                                        Text="{Binding price}"
                                        FontSize="Medium">
                                 </Label>
                                 <Label HorizontalOptions="FillAndExpand"
                                        Text="{Binding quantity}"
                                        FontSize="Medium">
-                                </Label>
+                                </Label>-->
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

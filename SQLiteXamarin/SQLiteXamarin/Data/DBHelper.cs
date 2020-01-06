@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Newtonsoft.Json;
+using SQLite;
 using SQLiteXamarin.Model;
 using SQLiteXamarin.ViewModel;
 using System;
@@ -114,13 +115,25 @@ namespace SQLiteXamarin.Data
         {
             SQLiteConnection db = _db.GetConnection();
             db.Insert(order);
+            //MapToInventry(new DBHelper(),order);
             db.Close();
         }
-        public static ObservableCollection<Order> GetUserOrder(DBHelper db){            
+        public static ObservableCollection<Order> GetUserOrder(DBHelper db)
+        {
             User user = MainPageViewModel.GetCurrentUser();
             return new ObservableCollection<Order>(db.GetConnection().Table<Order>()
             .Where(x => x.user_id == user.user_id));
-            
         }
+        //public static void MapToInventry(DBHelper _db,Order order)
+        //{
+        //    var item = JsonConvert.DeserializeObject(order.cart) as Cart). 
+        //    var ItemList = new ObservableCollection<Item>(_db.GetConnection().Table<Item>()
+        //         .Where(x => x.item_id ==);
+        //}
+        //public static void deleteEntries(DBHelper db)
+        //{
+        //    db.GetConnection().Table<Order>().Delete(x => x.user_id == 0 || x.user_id ==1 || x.user_id == 2);            
+        //}
     }
+
 }

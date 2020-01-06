@@ -55,7 +55,7 @@ namespace SQLiteXamarin.ViewModel
                     ordertime = DateTime.UtcNow,
                     Phone_no = _PhoneNumber,
                     order_address = _Address,
-                    cart = JsonConvert.SerializeObject(this.cart.cartItems),
+                    cart = JsonConvert.SerializeObject(this.cart),
                     user_id = cart.user_id,
                 };
                 DBHelper.CartToOrder(new DBHelper(), o);

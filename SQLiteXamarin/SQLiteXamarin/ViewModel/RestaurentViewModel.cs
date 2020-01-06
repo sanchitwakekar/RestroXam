@@ -45,7 +45,7 @@ namespace SQLiteXamarin.ViewModel
             set
             {
                 _RestaurantList = value;
-                OnPropertyChanged();
+                OnPropertyChanged("RestaurantList");
             }
         }
 
