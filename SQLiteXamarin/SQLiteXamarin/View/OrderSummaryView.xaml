@@ -6,13 +6,12 @@
              mc:Ignorable="d"
              x:Class="SQLiteXamarin.View.OrderSummaryView">
     <ContentPage.Content>
-         <StackLayout>
+        <StackLayout>
 
             <ListView ItemsSource="{Binding CartItemList}"
-                      HasUnevenRows="true"
                       VerticalOptions="Start"
-                      x:Name="lst_Order"
-                      SeparatorVisibility="None">
+                      HasUnevenRows="True"
+                      x:Name="lst_Order">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -25,11 +24,10 @@
                                        FontSize="Medium">
                                 </Label>
 
-                                <ListView ItemsSource="{Binding cartItems}"
-                                          HasUnevenRows="true"
+                                <ListView ItemsSource="{Binding cartItems}"                                        
                                           x:Name="lst_Order"
                                           VerticalOptions="Center"
-                                          SeparatorVisibility="None">
+                                        >
 
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -54,7 +52,7 @@
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
-                                
+
                                 <BoxView   HorizontalOptions="FillAndExpand"
                                            HeightRequest="1"
                                            WidthRequest="50"
@@ -72,7 +70,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
