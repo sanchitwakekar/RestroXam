@@ -11,7 +11,7 @@ using System.Text;
 
 namespace SQLiteXamarin.ViewModel
 {
-    class OrderSummaryViewModel : INotifyPropertyChanged
+    class OrderSummaryViewModel : INotifyPropertyChanged 
     {
         private ObservableCollection<Order> _orderList;
         private ObservableCollection<Cart> _cartItemsList;

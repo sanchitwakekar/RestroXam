@@ -34,7 +34,7 @@ namespace SQLiteXamarin.ViewModel
                 };
                 DBHelper.AddRestaurant(new DBHelper(), rest);
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PopAsync();
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new RestaurantView());
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new OwnerView());
             }
         }
         public string RestaurantArea
